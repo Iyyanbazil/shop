@@ -22,6 +22,84 @@
     margin-left: -1.2rem;
   }
 
+  /* Yellow cart icon */
+  .header__icon--cart {
+    color: #f5a623;
+  }
+  .cart-count-bubble {
+    background-color: #f5a623 !important;
+    border-color: #f5a623 !important;
+  }
+
+  /* Inline search bar (desktop only) */
+  .header__search-inline {
+    display: flex;
+    align-items: center;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 25px;
+    overflow: hidden;
+    height: 3.6rem;
+    margin-left: 0.8rem;
+    background: #fff;
+  }
+
+  .header__search-inline input[type="search"] {
+    border: none;
+    outline: none;
+    padding: 0 0.8rem 0 1.2rem;
+    font-size: 1.3rem;
+    width: 160px;
+    background: transparent;
+    height: 100%;
+    color: rgb(var(--color-foreground));
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .header__search-inline input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+  }
+
+  .header__search-inline-btn {
+    background: #2986a8;
+    border: none;
+    cursor: pointer;
+    padding: 0 1rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 38px;
+    flex-shrink: 0;
+  }
+
+  .header__search-inline-btn:hover {
+    background: #217a9a;
+  }
+
+  .header__search-inline-btn svg {
+    width: 15px;
+    height: 15px;
+    stroke: white;
+    fill: none;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* Hide the modal search trigger on desktop when inline search is present */
+  @media screen and (min-width: 990px) {
+    .header__icons .header__search {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 989px) {
+    .header__search-inline {
+      display: none;
+    }
+  }
+
   {%- if section.settings.sticky_header_type == 'reduce-logo-size' -%}
     .scrolled-past-header .header__heading-logo-wrapper {
       width: 75%;
@@ -301,6 +379,22 @@
           </div>
         {%- endif -%}
       </a>
+      <form action="{{ routes.search_url }}" method="get" class="header__search-inline" role="search">
+        <input
+          type="search"
+          name="q"
+          placeholder="{{ 'general.search.search' | t }}"
+          value="{{ search.terms | escape }}"
+          aria-label="{{ 'general.search.search' | t }}"
+        >
+        <input type="hidden" name="options[prefix]" value="last">
+        <button type="submit" class="header__search-inline-btn" aria-label="{{ 'general.search.search' | t }}">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+        </button>
+      </form>
     </div>
   </header>
 </{{ header_tag }}>
