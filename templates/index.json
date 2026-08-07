@@ -186,7 +186,9 @@
           "settings": {
             "show_sample_reviews": true,
             "reviews_selection": "all",
-            "products": [],
+            "products": [
+              "blocks-shape-sorting-toy"
+            ],
             "filter_pinned": false,
             "filter_featured": false,
             "filter_custom_tags": "",
