@@ -22,9 +22,24 @@
     margin-left: -1.2rem;
   }
 
-  /* Yellow cart icon */
+  /* Yellow cart icon — sized down so stroke trolley isn't oversized */
   .header__icon--cart {
     color: #f5a623;
+  }
+
+  /* Raise section-header above page content (base.css sets z-index:3 which loses
+     to product card action buttons at z-index 10–12) */
+  .section-header {
+    z-index: 50 !important;
+  }
+
+  .cart-notification.active {
+    z-index: 50;
+  }
+
+  .header__icon--cart .svg-wrapper {
+    width: 22px;
+    height: 22px;
   }
   .cart-count-bubble {
     background-color: #f5a623 !important;
