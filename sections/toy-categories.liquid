@@ -136,8 +136,26 @@
     <div class="toy-categories__grid">
       {%- for block in section.blocks -%}
         {%- assign blob_mod = forloop.index | modulo: 5 -%}
+        {%- assign linked_collection = blank -%}
+        {%- if block.settings.collection != blank -%}
+          {%- assign linked_collection = collections[block.settings.collection] -%}
+        {%- endif -%}
+        {%- if block.settings.link != blank -%}
+          {%- assign item_url = block.settings.link -%}
+        {%- elsif linked_collection != blank -%}
+          {%- assign item_url = linked_collection.url -%}
+        {%- else -%}
+          {%- assign item_url = '#' -%}
+        {%- endif -%}
+        {%- if block.settings.title != blank -%}
+          {%- assign item_title = block.settings.title -%}
+        {%- elsif linked_collection != blank -%}
+          {%- assign item_title = linked_collection.title -%}
+        {%- else -%}
+          {%- assign item_title = '' -%}
+        {%- endif -%}
         <a
-          href="{{ block.settings.link | default: '#' }}"
+          href="{{ item_url }}"
           class="toy-category-item"
           {{ block.shopify_attributes }}
         >
@@ -166,10 +184,18 @@
                 <path fill="#B8E9F5" d="M164.721 37.4159C156.336 25.4953 139.983 19.7652 127.305 24.7322C118.92 3.67506 88.8928 -3.95926 66.3796 1.91858C40.6028 8.64888 29.116 34.1745 35.8094 56.8334C28.7422 55.3038 21.0555 56.4278 14.5871 60.1436C1.83365 67.4754 -2.40597 83.294 1.27644 96.8784C5.18727 111.305 17.4943 122.473 32.4731 124.291C45.0189 125.814 56.388 121.328 66.4038 114.55C77.1154 131.09 103.252 132.644 122.024 127.158C134.002 123.659 144.811 116.595 151.743 106.163C155.457 100.577 158.616 92.9839 158.433 85.9442C175.204 78.6261 174.848 51.8046 164.725 37.4159H164.721Z"/>
               {%- endif -%}
             <span class="toy-category-item__icon">
-              {%- if block.settings.icon != blank -%}
+              {%- if linked_collection != blank and linked_collection.featured_image != blank -%}
+                <img
+                  src="{{ linked_collection.featured_image | image_url: width: 120 }}"
+                  alt="{{ linked_collection.title | escape }}"
+                  width="58"
+                  height="58"
+                  loading="lazy"
+                >
+              {%- elsif block.settings.icon != blank -%}
                 <img
                   src="{{ block.settings.icon | image_url: width: 120 }}"
-                  alt="{{ block.settings.title | escape }}"
+                  alt="{{ item_title | escape }}"
                   width="58"
                   height="58"
                   loading="lazy"
@@ -179,8 +205,8 @@
               {%- endif -%}
             </span>
           </div>
-          {%- if block.settings.title != blank -%}
-            <span class="toy-category-item__name">{{ block.settings.title }}</span>
+          {%- if item_title != blank -%}
+            <span class="toy-category-item__name">{{ item_title }}</span>
           {%- endif -%}
         </a>
       {%- endfor -%}
@@ -211,28 +237,35 @@
       "name": "Category",
       "settings": [
         {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection",
+          "info": "Auto-fills the image, name, and link from this collection."
+        },
+        {
           "type": "text",
           "id": "title",
           "label": "Category Name",
-          "default": "Category"
+          "info": "Overrides the collection name if filled."
         },
         {
           "type": "image_picker",
           "id": "icon",
           "label": "Icon Image",
-          "info": "Upload a custom icon. If empty, the emoji below is used."
+          "info": "Overrides the collection image if uploaded."
         },
         {
           "type": "text",
           "id": "emoji",
           "label": "Emoji Icon",
           "default": "🧸",
-          "info": "Used when no image is uploaded."
+          "info": "Used when no collection or image is set."
         },
         {
           "type": "url",
           "id": "link",
-          "label": "Collection Link"
+          "label": "Custom Link",
+          "info": "Overrides the collection URL if filled."
         }
       ]
     }
