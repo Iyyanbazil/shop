@@ -51,11 +51,12 @@
     color: #F5A623 !important;
   }
 
-  /* flex-column card so order property takes effect */
-  .jdgm-carousel-item > *,
-  .jdgm-carousel__item > * {
-    display: flex;
-    flex-direction: column;
+  /* flex-column on the review wrapper so order on rating takes effect,
+     WITHOUT touching inline star icon elements */
+  .jdgm-carousel-item .jdgm-rev,
+  .jdgm-carousel__item .jdgm-rev {
+    display: flex !important;
+    flex-direction: column !important;
   }
 </style>
 
