@@ -63,10 +63,9 @@
   /* Subtitle second */
   #Banner-{{ section.id }} .banner__text {
     order: 2;
-    display: inline-block;
-    background: rgba(176, 216, 235, 0.72);
-    padding: 0.8rem 1.2rem;
-    border-radius: 2px;
+    background: none !important;
+    padding: 0;
+    border-radius: 0;
     color: #1a1a1a;
     margin-top: 1.2rem;
   }
@@ -82,6 +81,9 @@
   }
 
   #Banner-{{ section.id }} .banner__buttons .button {
+    --alpha-button-border: 0;
+    -webkit-appearance: none;
+    appearance: none;
     background-color: #f5d020 !important;
     color: #333333 !important;
     border: none !important;
@@ -92,8 +94,12 @@
     font-weight: 600;
   }
 
-  #Banner-{{ section.id }} .banner__buttons .button:hover {
+  #Banner-{{ section.id }} .banner__buttons .button:hover,
+  #Banner-{{ section.id }} .banner__buttons .button:focus {
     background-color: #e8c41a !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
   }
 {%- endstyle -%}
 
