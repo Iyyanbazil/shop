@@ -12,17 +12,24 @@
     "image_banner": {
       "type": "image-banner",
       "blocks": {
+        "text_yBMTT6": {
+          "type": "text",
+          "settings": {
+            "text": "Crafting smiles with every toy, made for learning, fun, and growth",
+            "text_style": "body"
+          }
+        },
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Browse our latest products",
+            "heading": "Play, learn, & grow!",
             "heading_size": "h0"
           }
         },
         "button": {
           "type": "buttons",
           "settings": {
-            "button_label_1": "Shop all",
+            "button_label_1": "Shop Now",
             "button_link_1": "shopify://collections/all",
             "button_style_secondary_1": true,
             "button_label_2": "",
@@ -32,6 +39,7 @@
         }
       },
       "block_order": [
+        "text_yBMTT6",
         "heading",
         "button"
       ],
