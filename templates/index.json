@@ -208,12 +208,12 @@
             "header_text_color": "#000000",
             "text_color": "#000000",
             "card_color": "#fff0f2",
-            "stars_color": "#f5a623",
+            "stars_color": "#F59A23",
             "arrows_color": "#888888",
             "transition_speed": 5,
             "header_text": "",
-            "show_average_rating": true,
-            "rating_display": "default"
+            "show_average_rating": false,
+            "rating_display": "show_nothing"
           }
         }
       },
