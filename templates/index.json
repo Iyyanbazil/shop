@@ -123,29 +123,6 @@
         "subtitle": "Our Collections"
       }
     },
-    "toy_promo_banner": {
-      "type": "toy-promo-banner",
-      "settings": {
-        "panel_height": 280,
-        "max_width": 1400,
-        "border_radius": 16,
-        "section_margin": 80,
-        "left_bg_color": "#b8eaf5",
-        "left_heading": "Discover the\nJoy of Play",
-        "left_heading_color": "#2b6cb0",
-        "left_heading_size": 28,
-        "right_bg_color": "#d4eef8",
-        "right_heading": "Eco – Friendly Toys",
-        "right_heading_color": "#1a6a8a",
-        "right_heading_size": 30,
-        "right_subtext": "Flash sale 30%, Extra discount for loyal customers",
-        "right_subtext_color": "#333333",
-        "button_label": "Shop now",
-        "button_link": "shopify://collections/eco-friendly-toys",
-        "button_bg_color": "#f5c842",
-        "button_text_color": "#333333"
-      }
-    },
     "top_picks": {
       "type": "top-picks",
       "settings": {
@@ -161,6 +138,31 @@
         "show_secondary_image": true,
         "show_rating": false,
         "quick_add": "none"
+      }
+    },
+    "toy_promo_banner": {
+      "type": "toy-promo-banner",
+      "settings": {
+        "panel_height": 280,
+        "max_width": 1400,
+        "border_radius": 16,
+        "section_margin": 80,
+        "left_bg_image": "shopify://shop_images/Rectangle_15.png",
+        "left_bg_color": "#b8eaf5",
+        "left_heading": "Discover the\nJoy of Play",
+        "left_heading_color": "#2b6cb0",
+        "left_heading_size": 28,
+        "right_bg_image": "shopify://shop_images/Rectangle_16.png",
+        "right_bg_color": "#d4eef8",
+        "right_heading": "Eco – Friendly Toys",
+        "right_heading_color": "#1a6a8a",
+        "right_heading_size": 30,
+        "right_subtext": "Flash sale 30%, Extra discount for loyal customers",
+        "right_subtext_color": "#333333",
+        "button_label": "Shop now",
+        "button_link": "shopify://collections/eco-friendly-toys",
+        "button_bg_color": "#f5c842",
+        "button_text_color": "#333333"
       }
     },
     "featured_collection": {
