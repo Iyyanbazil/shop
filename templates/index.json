@@ -191,7 +191,7 @@
             "filter_featured": false,
             "filter_custom_tags": "",
             "star_rating": "all",
-            "show_review_media": true,
+            "show_review_media": false,
             "display_order": "media_first",
             "no_image_fallback": "review_text_only",
             "max_reviews": 20,
@@ -207,8 +207,8 @@
             "corner_styling": "soft",
             "header_text_color": "#000000",
             "text_color": "#000000",
-            "card_color": "#FFF0F2",
-            "stars_color": "#F5A623",
+            "card_color": "#fff0f2",
+            "stars_color": "#f5a623",
             "arrows_color": "#888888",
             "transition_speed": 5,
             "header_text": "",
@@ -221,9 +221,6 @@
         "judge_me_reviews_cards_carousel_UWUThH"
       ],
       "settings": {
-        "heading": "Hear from Other Happy Parents",
-        "heading_size": 36,
-        "subheading": "Customer testimonials",
         "include_margins": true
       }
     }
