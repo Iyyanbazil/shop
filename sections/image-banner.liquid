@@ -105,28 +105,57 @@
 
   @media screen and (max-width: 749px) {
     #Banner-{{ section.id }} {
-      flex-direction: column;
+      min-height: 75vw;
     }
 
     #Banner-{{ section.id }} .banner__media {
-      position: relative !important;
+      position: absolute !important;
       width: 100%;
-      height: auto;
-      min-height: 56vw;
+      height: 100%;
+      top: 0;
+      left: 0;
+    }
+
+    #Banner-{{ section.id }} .banner__media img {
+      object-position: 35% center;
     }
 
     #Banner-{{ section.id }} .banner__content {
       position: relative !important;
       width: 100%;
-      padding: 2rem 1.5rem;
-      background: rgb(var(--color-background));
-      justify-content: flex-start !important;
-      align-items: flex-start !important;
+      padding: 0 1rem 7rem !important;
+      justify-content: flex-end !important;
+      align-items: center !important;
+      background: transparent !important;
     }
 
     #Banner-{{ section.id }} .banner__box {
-      max-width: 100% !important;
-      width: 100%;
+      max-width: 52% !important;
+      width: 52%;
+      padding: 1rem !important;
+    }
+
+    #Banner-{{ section.id }} .banner__heading {
+      font-size: 2.8rem !important;
+      line-height: 1.2 !important;
+    }
+
+    #Banner-{{ section.id }} .banner__text {
+      font-size: 1.1rem !important;
+      margin-top: 0.6rem !important;
+    }
+
+    #Banner-{{ section.id }} .banner__buttons {
+      margin-top: 1rem !important;
+    }
+
+    #Banner-{{ section.id }} .banner__buttons .button {
+      padding: 0.7rem 1.2rem !important;
+      width: auto !important;
+      min-width: unset !important;
+      max-width: fit-content !important;
+      font-size: 1.2rem !important;
+      border-radius: 50px !important;
     }
   }
 {%- endstyle -%}
