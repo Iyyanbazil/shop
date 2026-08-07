@@ -1,6 +1,3 @@
-{{ 'component-slideshow.css' | asset_url | stylesheet_tag }}
-{{ 'component-slider.css' | asset_url | stylesheet_tag }}
-
 {%- liquid
   if section.blocks.size > 0
     assign announcement_bar = true
@@ -23,12 +20,12 @@
   .announcement-bar-section .utility-bar::after {
     content: '';
     position: absolute;
-    bottom: -13px;
+    bottom: -12px;
     left: 0;
     right: 0;
-    height: 13px;
-    background: radial-gradient(circle at 50% 0%, transparent 12.5px, #2986a8 13px);
-    background-size: 26px 13px;
+    height: 12px;
+    background: radial-gradient(circle at 50% 0%, #2986a8 12px, transparent 12px);
+    background-size: 24px 12px;
     background-repeat: repeat-x;
     background-position: 0 0;
   }
