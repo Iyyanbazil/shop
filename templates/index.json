@@ -150,12 +150,12 @@
         "left_bg_image": "shopify://shop_images/Rectangle_15.png",
         "left_bg_color": "#b8eaf5",
         "left_heading": "Discover the\nJoy of Play",
-        "left_heading_color": "#1096B5",
+        "left_heading_color": "#1096b5",
         "left_heading_size": 36,
         "right_bg_image": "shopify://shop_images/Rectangle_16.png",
         "right_bg_color": "#d4eef8",
         "right_heading": "Eco – Friendly Toys",
-        "right_heading_color": "#1096B5",
+        "right_heading_color": "#1096b5",
         "right_heading_size": 34,
         "right_subtext": "Flash sale 30%, Extra discount for loyal customers",
         "right_subtext_color": "#375259",
@@ -178,32 +178,57 @@
         "quick_add": "none"
       }
     },
-    "featured_collection": {
-      "type": "featured-collection",
+    "1786110080dc27c37a": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_cards_carousel_UWUThH": {
+          "type": "shopify://apps/judge-me-reviews/blocks/cards_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "show_sample_reviews": true,
+            "reviews_selection": "all",
+            "products": [],
+            "filter_pinned": false,
+            "filter_featured": false,
+            "filter_custom_tags": "",
+            "star_rating": "all",
+            "show_review_media": true,
+            "display_order": "media_first",
+            "no_image_fallback": "review_text_only",
+            "max_reviews": 20,
+            "review_length": "medium",
+            "text_size": "medium",
+            "image_ratio": "1",
+            "reviews_shown": 4,
+            "show_reviewer_name": true,
+            "show_product_name": true,
+            "hide_arrows_mobile": true,
+            "arrows_position": "sides",
+            "max_width": 1100,
+            "corner_styling": "soft",
+            "header_text_color": "#000000",
+            "text_color": "#000000",
+            "card_color": "#F9F9F9",
+            "stars_color": "",
+            "arrows_color": "#000000",
+            "transition_speed": 5,
+            "header_text": "Customers are saying",
+            "show_average_rating": true,
+            "rating_display": "default"
+          }
+        },
+        "judge_me_reviews_featured_carousel_eUAUyC": {
+          "type": "shopify://apps/judge-me-reviews/blocks/featured_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "maxwidth": 1080
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_cards_carousel_UWUThH",
+        "judge_me_reviews_featured_carousel_eUAUyC"
+      ],
       "settings": {
-        "collection": "all",
-        "products_to_show": 8,
-        "title": "Featured products",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "columns_desktop": 4,
-        "enable_desktop_slider": false,
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "color_scheme": "scheme-1",
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "swipe_on_mobile": false,
-        "padding_top": 44,
-        "padding_bottom": 36
+        "include_margins": true
       }
     }
   },
@@ -213,6 +238,6 @@
     "top_picks",
     "toy_promo_banner",
     "customer_loves",
-    "featured_collection"
+    "1786110080dc27c37a"
   ]
 }
