@@ -1,3 +1,14 @@
+{%- if section.settings.heading != blank or section.settings.subheading != blank -%}
+  <div class="apps-section-header page-width" style="text-align: center; margin-bottom: 2rem;">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="apps-section-heading" style="font-size: {{ section.settings.heading_size }}px; font-weight: 700; margin: 0 0 0.5rem;">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    {%- if section.settings.subheading != blank -%}
+      <p class="apps-section-subheading" style="color: #888; font-size: 1rem; margin: 0;">{{ section.settings.subheading }}</p>
+    {%- endif -%}
+  </div>
+{%- endif -%}
+
 <div class="{% if section.settings.include_margins %}page-width{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
   {%- for block in section.blocks -%}
     {% render block %}
@@ -10,6 +21,28 @@
   "tag": "section",
   "class": "section",
   "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": ""
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading size",
+      "default": 36
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": ""
+    },
     {
       "type": "checkbox",
       "id": "include_margins",
