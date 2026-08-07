@@ -102,6 +102,33 @@
     outline: none !important;
     box-shadow: none !important;
   }
+
+  @media screen and (max-width: 749px) {
+    #Banner-{{ section.id }} {
+      flex-direction: column;
+    }
+
+    #Banner-{{ section.id }} .banner__media {
+      position: relative !important;
+      width: 100%;
+      height: auto;
+      min-height: 56vw;
+    }
+
+    #Banner-{{ section.id }} .banner__content {
+      position: relative !important;
+      width: 100%;
+      padding: 2rem 1.5rem;
+      background: rgb(var(--color-background));
+      justify-content: flex-start !important;
+      align-items: flex-start !important;
+    }
+
+    #Banner-{{ section.id }} .banner__box {
+      max-width: 100% !important;
+      width: 100%;
+    }
+  }
 {%- endstyle -%}
 
 {%- liquid
