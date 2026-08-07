@@ -1,4 +1,8 @@
 <style>
+  .tpb-outer-{{ section.id }} {
+    padding: {{ section.settings.section_margin }}px 0;
+  }
+
   #toy-promo-banner-{{ section.id }} {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -6,9 +10,6 @@
     width: 100%;
     overflow: visible;
     border-radius: 0;
-    margin: {{ section.settings.section_margin }}px auto;
-    max-width: {{ section.settings.max_width }}px;
-    padding: 0 1.5rem;
     box-sizing: border-box;
   }
 
@@ -127,10 +128,12 @@
 
   /* ── MOBILE ── */
   @media screen and (max-width: 749px) {
+    .tpb-outer-{{ section.id }} {
+      padding: 1rem 0;
+    }
+
     #toy-promo-banner-{{ section.id }} {
       grid-template-columns: 1fr;
-      padding: 0 1rem;
-      margin: 1rem auto;
       border-radius: 0;
     }
 
@@ -164,6 +167,8 @@
   }
 </style>
 
+<div class="tpb-outer-{{ section.id }}">
+<div class="page-width">
 <div id="toy-promo-banner-{{ section.id }}">
 
   {%- comment -%} LEFT PANEL {%- endcomment -%}
@@ -210,6 +215,8 @@
     </div>
   </div>
 
+</div>
+</div>
 </div>
 
 {% schema %}
