@@ -165,6 +165,19 @@
         "button_text_color": "#333333"
       }
     },
+    "customer_loves": {
+      "type": "customer-loves",
+      "settings": {
+        "title": "Customer Loves",
+        "subtitle": "Popular product",
+        "collection": "all",
+        "products_to_show": 4,
+        "image_ratio": "adapt",
+        "show_secondary_image": true,
+        "show_rating": true,
+        "quick_add": "none"
+      }
+    },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
@@ -199,6 +212,7 @@
     "toy_categories",
     "top_picks",
     "toy_promo_banner",
+    "customer_loves",
     "featured_collection"
   ]
 }

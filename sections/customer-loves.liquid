@@ -1,0 +1,168 @@
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .customer-loves-section {
+    padding: 5rem 0 4rem;
+    background: #ffffff;
+    text-align: center;
+  }
+
+  .customer-loves__subtitle {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #888888;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 0 0.6rem;
+  }
+
+  .customer-loves__heading {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 3rem;
+  }
+
+  .customer-loves__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    text-align: left;
+  }
+
+  @media screen and (max-width: 989px) {
+    .customer-loves__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.2rem;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .customer-loves-section {
+      padding: 3rem 1.5rem;
+    }
+
+    .customer-loves__heading {
+      font-size: 2.2rem;
+    }
+  }
+</style>
+
+<div class="customer-loves-section">
+  <div class="page-width">
+    {%- if section.settings.subtitle != blank -%}
+      <p class="customer-loves__subtitle">{{ section.settings.subtitle }}</p>
+    {%- endif -%}
+    {%- if section.settings.title != blank -%}
+      <h2 class="customer-loves__heading">{{ section.settings.title }}</h2>
+    {%- endif -%}
+
+    <div class="customer-loves__grid">
+      {%- if section.settings.collection != blank -%}
+        {%- assign skip_styles = false -%}
+        {%- for product in section.settings.collection.products limit: section.settings.products_to_show -%}
+          {% render 'card-product',
+            card_product: product,
+            media_aspect_ratio: section.settings.image_ratio,
+            show_secondary_image: section.settings.show_secondary_image,
+            show_vendor: false,
+            show_rating: section.settings.show_rating,
+            lazy_load: true,
+            skip_styles: skip_styles,
+            section_id: section.id,
+            quick_add: section.settings.quick_add
+          %}
+          {%- assign skip_styles = true -%}
+        {%- else -%}
+          {%- for i in (1..4) -%}
+            {%- assign placeholder_image = 'product-apparel-' | append: forloop.index -%}
+            {% render 'card-product', placeholder_image: placeholder_image, media_aspect_ratio: 'adapt', skip_styles: false %}
+          {%- endfor -%}
+        {%- endfor -%}
+      {%- else -%}
+        {%- for i in (1..4) -%}
+          {%- assign placeholder_image = 'product-apparel-' | append: forloop.index -%}
+          {% render 'card-product', placeholder_image: placeholder_image, media_aspect_ratio: 'adapt', skip_styles: false %}
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Customer Loves",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Customer Loves"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subheading",
+      "default": "Popular product"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 4,
+      "max": 12,
+      "step": 4,
+      "default": 4,
+      "label": "Products to show"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image ratio",
+      "options": [
+        { "value": "adapt", "label": "Adapt to image" },
+        { "value": "portrait", "label": "Portrait" },
+        { "value": "square", "label": "Square" }
+      ],
+      "default": "adapt"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_image",
+      "label": "Show second image on hover",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "Show product rating",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "quick_add",
+      "label": "Quick add",
+      "default": "none",
+      "options": [
+        { "value": "none", "label": "No button" },
+        { "value": "standard", "label": "Quick add button" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Customer Loves"
+    }
+  ]
+}
+{% endschema %}
