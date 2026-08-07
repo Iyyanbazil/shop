@@ -13,51 +13,6 @@
     {%- endif -%}
   }
 
-  /* ── Stars: force gold colour and push to top of card ── */
-  .jdgm-carousel-item .jdgm-rev__rating,
-  .jdgm-carousel__item .jdgm-rev__rating {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    order: -1 !important;
-    margin-bottom: 0.5rem;
-  }
-
-  /* filled stars */
-  .jdgm-carousel-item .jdgm-star--on,
-  .jdgm-carousel__item .jdgm-star--on,
-  .jdgm-carousel-item [class*="jdgm-star"][class*="on"],
-  .jdgm-carousel__item [class*="jdgm-star"][class*="on"] {
-    color: #F5A623 !important;
-    fill: #F5A623 !important;
-  }
-
-  /* half and empty stars */
-  .jdgm-carousel-item .jdgm-star--half,
-  .jdgm-carousel__item .jdgm-star--half {
-    color: #F5A623 !important;
-  }
-  .jdgm-carousel-item .jdgm-star--off,
-  .jdgm-carousel__item .jdgm-star--off {
-    color: #e0c8a0 !important;
-  }
-
-  /* catch SVG-based star icons */
-  .jdgm-carousel-item .jdgm-rev__rating svg,
-  .jdgm-carousel__item .jdgm-rev__rating svg,
-  .jdgm-carousel-item .jdgm-rev__rating svg path,
-  .jdgm-carousel__item .jdgm-rev__rating svg path {
-    fill: #F5A623 !important;
-    color: #F5A623 !important;
-  }
-
-  /* flex-column on the review wrapper so order on rating takes effect,
-     WITHOUT touching inline star icon elements */
-  .jdgm-carousel-item .jdgm-rev,
-  .jdgm-carousel__item .jdgm-rev {
-    display: flex !important;
-    flex-direction: column !important;
-  }
 </style>
 
 {%- if section.settings.heading != blank or section.settings.subheading != blank -%}

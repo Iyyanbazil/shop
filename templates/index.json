@@ -210,7 +210,7 @@
             "header_text_color": "#000000",
             "text_color": "#000000",
             "card_color": "#fff0f2",
-            "stars_color": "#F59A23",
+            "stars_color": "",
             "arrows_color": "#888888",
             "transition_speed": 5,
             "header_text": "",
