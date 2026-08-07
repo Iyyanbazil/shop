@@ -128,7 +128,7 @@
       "settings": {
         "title": "Top picks for your little ones",
         "tab_1_label": "Featured",
-        "featured_collection": "all",
+        "featured_collection": "top-seller",
         "tab_2_label": "Best seller",
         "bestseller_collection": "top-seller",
         "tab_3_label": "New arrivals",
