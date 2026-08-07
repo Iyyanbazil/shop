@@ -32,6 +32,21 @@
   }
 
   /* Inline search bar (desktop only) */
+  .header__search-inline-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-left: 0.8rem;
+  }
+
+  .header__search-inline-wrapper .predictive-search {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 100;
+  }
+
   .header__search-inline {
     display: flex;
     align-items: center;
@@ -39,7 +54,6 @@
     border-radius: 25px;
     overflow: hidden;
     height: 3.6rem;
-    margin-left: 0.8rem;
     background: #fff;
   }
 
@@ -87,15 +101,8 @@
     stroke-linejoin: round;
   }
 
-  /* Hide the modal search trigger on desktop when inline search is present */
-  @media screen and (min-width: 990px) {
-    .header__icons .header__search {
-      display: none;
-    }
-  }
-
   @media screen and (max-width: 989px) {
-    .header__search-inline {
+    .header__search-inline-wrapper {
       display: none;
     }
   }
@@ -219,10 +226,6 @@
       if section.settings.menu != blank
         render 'header-drawer'
       endif
-
-      if section.settings.logo_position == 'top-center' or section.settings.menu == blank
-        render 'header-search', input_id: 'Search-In-Modal-1'
-      endif
     -%}
 
     {%- if section.settings.logo_position != 'middle-center' -%}
@@ -325,36 +328,6 @@
           </localization-form>
         {%- endif -%}
       </div>
-      {% render 'header-search', input_id: 'Search-In-Modal' %}
-
-      {%- if shop.customer_accounts_enabled -%}
-        <a
-          href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
-          class="header__icon header__icon--account link focus-inset{% if section.settings.menu != blank %} small-hide{% endif %}"
-          rel="nofollow"
-        >
-          {%- if section.settings.enable_customer_avatar -%}
-            <account-icon>
-              {%- if customer and customer.has_avatar? -%}
-                {{ customer | avatar }}
-              {%- else -%}
-                <span class="svg-wrapper">{{ 'icon-account.svg' | inline_asset_content }}</span>
-              {%- endif -%}
-            </account-icon>
-          {%- else -%}
-            <span class="svg-wrapper">{{ 'icon-account.svg' | inline_asset_content }}</span>
-          {%- endif -%}
-          <span class="visually-hidden">
-            {%- liquid
-              if customer
-                echo 'customer.account_fallback' | t
-              else
-                echo 'customer.log_in' | t
-              endif
-            -%}
-          </span>
-        </a>
-      {%- endif -%}
 
       {%- for block in section.blocks -%}
         {%- case block.type -%}
@@ -379,22 +352,51 @@
           </div>
         {%- endif -%}
       </a>
-      <form action="{{ routes.search_url }}" method="get" class="header__search-inline" role="search">
-        <input
-          type="search"
-          name="q"
-          placeholder="{{ 'general.search.search' | t }}"
-          value="{{ search.terms | escape }}"
-          aria-label="{{ 'general.search.search' | t }}"
-        >
-        <input type="hidden" name="options[prefix]" value="last">
-        <button type="submit" class="header__search-inline-btn" aria-label="{{ 'general.search.search' | t }}">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <circle cx="11" cy="11" r="8"/>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-          </svg>
-        </button>
-      </form>
+      {%- if settings.predictive_search_enabled -%}
+        <predictive-search class="header__search-inline-wrapper" data-loading-text="{{ 'accessibility.loading' | t }}">
+      {%- else -%}
+        <search-form class="header__search-inline-wrapper">
+      {%- endif -%}
+        <form action="{{ routes.search_url }}" method="get" class="header__search-inline" role="search">
+          <input
+            type="search"
+            name="q"
+            id="Search-In-Header-Inline"
+            placeholder="{{ 'general.search.search' | t }}"
+            value="{{ search.terms | escape }}"
+            aria-label="{{ 'general.search.search' | t }}"
+            {%- if settings.predictive_search_enabled -%}
+              role="combobox"
+              aria-expanded="false"
+              aria-owns="predictive-search-results-inline"
+              aria-controls="predictive-search-results-inline"
+              aria-haspopup="listbox"
+              aria-autocomplete="list"
+              autocorrect="off"
+              autocomplete="off"
+              autocapitalize="off"
+              spellcheck="false"
+            {%- endif -%}
+          >
+          <input type="hidden" name="options[prefix]" value="last">
+          <button type="submit" class="header__search-inline-btn" aria-label="{{ 'general.search.search' | t }}">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </button>
+          {%- if settings.predictive_search_enabled -%}
+            <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search id="predictive-search-results-inline">
+              {%- render 'loading-spinner', class: 'predictive-search__loading-state' -%}
+            </div>
+            <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
+          {%- endif -%}
+        </form>
+      {%- if settings.predictive_search_enabled -%}
+        </predictive-search>
+      {%- else -%}
+        </search-form>
+      {%- endif -%}
     </div>
   </header>
 </{{ header_tag }}>

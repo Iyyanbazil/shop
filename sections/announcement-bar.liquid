@@ -92,8 +92,13 @@
       {%- endif -%}
     </div>
     <div class="utility-bar__auth">
-      <a href="{{ routes.account_login_url }}">Login</a>
-      <a href="{{ routes.account_register_url }}">Register</a>
+      {%- if customer -%}
+        <a href="{{ routes.account_url }}">Login</a>
+        <a href="{{ routes.account_url }}">Register</a>
+      {%- else -%}
+        <a href="{{ routes.account_login_url }}">Login</a>
+        <a href="{{ routes.account_register_url }}">Register</a>
+      {%- endif -%}
     </div>
   </div>
 </div>
