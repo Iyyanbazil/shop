@@ -130,7 +130,7 @@
         "tab_1_label": "Featured",
         "featured_collection": "all",
         "tab_2_label": "Best seller",
-        "bestseller_collection": "",
+        "bestseller_collection": "top-seller",
         "tab_3_label": "New arrivals",
         "new_arrivals_collection": "",
         "products_to_show": 8,
