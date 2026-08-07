@@ -1,0 +1,283 @@
+<style>
+  .toy-categories-section {
+    padding: 5rem 0 4rem;
+    text-align: center;
+    background: #ffffff;
+  }
+
+  .toy-categories__heading {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 0.4rem;
+  }
+
+  .toy-categories__subheading {
+    font-size: 1.5rem;
+    color: #777777;
+    margin: 0 0 3.5rem;
+  }
+
+  .toy-categories__grid {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+  }
+
+  .toy-category-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+    text-decoration: none;
+    color: #1a1a1a;
+    width: 160px;
+  }
+
+  .toy-category-item__blob {
+    width: 160px;
+    height: 112px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.25s ease;
+  }
+
+  .toy-category-item:hover .toy-category-item__blob {
+    transform: scale(1.08);
+  }
+
+  .blob-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .toy-category-item__icon {
+    position: relative;
+    z-index: 1;
+    font-size: 3.8rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.4rem;
+  }
+
+  .toy-category-item__icon img {
+    width: 58px;
+    height: 58px;
+    object-fit: contain;
+  }
+
+  .toy-category-item__name {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #1a1a1a;
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  @media screen and (max-width: 749px) {
+    .toy-categories-section {
+      padding: 3rem 1.5rem;
+    }
+
+    .toy-categories__heading {
+      font-size: 2.2rem;
+    }
+
+    .toy-categories__subheading {
+      margin-bottom: 2.5rem;
+    }
+
+    .toy-categories__grid {
+      gap: 1.2rem 0.8rem;
+    }
+
+    .toy-category-item {
+      width: 100px;
+    }
+
+    .toy-category-item__blob {
+      width: 100px;
+      height: 70px;
+    }
+
+    .toy-category-item__icon {
+      font-size: 2.6rem;
+    }
+
+    .toy-category-item__icon img {
+      width: 38px;
+      height: 38px;
+    }
+
+    .toy-category-item__name {
+      font-size: 1.1rem;
+    }
+  }
+</style>
+
+<div class="toy-categories-section">
+  <div class="page-width">
+    {%- if section.settings.title != blank -%}
+      <h2 class="toy-categories__heading">{{ section.settings.title }}</h2>
+    {%- endif -%}
+    {%- if section.settings.subtitle != blank -%}
+      <p class="toy-categories__subheading">{{ section.settings.subtitle }}</p>
+    {%- endif -%}
+
+    <div class="toy-categories__grid">
+      {%- for block in section.blocks -%}
+        {%- assign blob_mod = forloop.index | modulo: 5 -%}
+        <a
+          href="{{ block.settings.link | default: '#' }}"
+          class="toy-category-item"
+          {{ block.shopify_attributes }}
+        >
+          <div class="toy-category-item__blob">
+            <svg
+              class="blob-svg"
+              {%- if blob_mod == 1 -%}viewBox="0 0 172 130"
+              {%- elsif blob_mod == 2 -%}viewBox="0 0 171 130"
+              {%- elsif blob_mod == 3 -%}viewBox="0 0 190 130"
+              {%- elsif blob_mod == 4 -%}viewBox="0 0 195 130"
+              {%- else -%}viewBox="0 0 172 130"
+              {%- endif -%}
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+              preserveAspectRatio="none"
+            >
+              {%- if blob_mod == 1 -%}
+                <path fill="#B8E9F5" d="M164.721 37.4152C156.336 25.4945 139.983 19.7645 127.305 24.7314C118.92 3.67433 88.8928 -3.95999 66.3796 1.91785C40.6028 8.64815 29.116 34.1738 35.8094 56.8327C28.7422 55.3031 21.0555 56.4271 14.5871 60.1429C1.83365 67.4747 -2.40597 83.2933 1.27644 96.8777C5.18727 111.304 17.4943 122.472 32.4731 124.29C45.0189 125.813 56.388 121.327 66.4038 114.549C77.1154 131.089 103.252 132.643 122.024 127.157C134.002 123.658 144.811 116.594 151.743 106.162C155.457 100.576 158.616 92.9832 158.433 85.9435C175.204 78.6254 174.848 51.8039 164.725 37.4152H164.721Z"/>
+              {%- elsif blob_mod == 2 -%}
+                <path fill="#B8E9F5" d="M169.054 73.2216C165.577 58.1326 154.852 43.0889 138.943 38.8247C130.622 36.5948 121.36 37.6138 113.758 41.4802C113.94 23.9485 105.094 6.2528 86.5554 1.09518C73.759 -2.4677 60.401 2.93071 53.6933 12.9668C45.0038 8.70947 33.8351 8.8665 25.2028 13.553C8.51418 22.619 1.94248 43.2285 0.28972 60.6242C-1.338 77.7232 3.75981 96.3262 18.37 106.955C28.934 114.64 43.3904 117.606 55.618 112.996C64.9765 125.398 81.4147 131.456 97.2197 129.697C108.213 128.472 123.871 123.2 132.096 113.949C138.449 117.051 146.348 117.431 153.242 114.654C169.591 108.058 172.51 88.2059 169.058 73.2216H169.054Z"/>
+              {%- elsif blob_mod == 3 -%}
+                <path fill="#B8E9F5" d="M189.013 72.0411C187.221 62.7077 182.18 54.7094 175.44 48.3779C176.738 29.9093 162.299 12.614 143.918 6.32704C128.362 1.00696 112.219 4.80586 101.668 14.9201C87.1915 -6.35214 44.5564 -2.58561 27.2684 11.8979C14.1275 22.9063 10.1747 41.3627 13.8524 58.0511C8.09922 62.3072 3.72161 68.5214 1.5409 75.2736C-5.95605 98.4918 15.1026 119.809 38.3986 115.84C39.9805 115.569 41.5462 115.16 43.0756 114.634C47.5017 118.113 52.4781 120.957 57.7013 123.069C75.3048 130.186 96.0762 130.845 114.776 129.328C133.314 127.827 154.34 124.635 169.953 113.756C183.523 104.301 192.234 88.8186 189.017 72.0371L189.013 72.0411Z"/>
+              {%- elsif blob_mod == 4 -%}
+                <path fill="#B8E9F5" d="M189.755 61.6107C183.182 51.8198 171.018 48.0053 159.936 49.993C160.53 24.5454 140.163 0.669727 112.701 0.0161057C83.1241 -0.691146 59.9758 21.9912 56.0172 49.0545C39.4186 35.3988 12.1542 38.3485 2.64815 61.718C-7.75281 87.293 14.2156 110.203 38.2219 107.984C41.2219 121.037 56.034 129.075 69.8606 129.886C87.5251 130.925 104.851 124.808 118.963 114.46C137.026 130.496 166.369 125.763 178.492 104.083C192.859 95.7231 199.693 76.4194 189.752 61.6074L189.755 61.6107Z"/>
+              {%- else -%}
+                <path fill="#B8E9F5" d="M164.721 37.4159C156.336 25.4953 139.983 19.7652 127.305 24.7322C118.92 3.67506 88.8928 -3.95926 66.3796 1.91858C40.6028 8.64888 29.116 34.1745 35.8094 56.8334C28.7422 55.3038 21.0555 56.4278 14.5871 60.1436C1.83365 67.4754 -2.40597 83.294 1.27644 96.8784C5.18727 111.305 17.4943 122.473 32.4731 124.291C45.0189 125.814 56.388 121.328 66.4038 114.55C77.1154 131.09 103.252 132.644 122.024 127.158C134.002 123.659 144.811 116.595 151.743 106.163C155.457 100.577 158.616 92.9839 158.433 85.9442C175.204 78.6261 174.848 51.8046 164.725 37.4159H164.721Z"/>
+              {%- endif -%}
+            <span class="toy-category-item__icon">
+              {%- if block.settings.icon != blank -%}
+                <img
+                  src="{{ block.settings.icon | image_url: width: 120 }}"
+                  alt="{{ block.settings.title | escape }}"
+                  width="58"
+                  height="58"
+                  loading="lazy"
+                >
+              {%- else -%}
+                {{ block.settings.emoji }}
+              {%- endif -%}
+            </span>
+          </div>
+          {%- if block.settings.title != blank -%}
+            <span class="toy-category-item__name">{{ block.settings.title }}</span>
+          {%- endif -%}
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Toy Categories",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Find the Perfect Toy"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subheading",
+      "default": "Our Collections"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Category Name",
+          "default": "Category"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon Image",
+          "info": "Upload a custom icon. If empty, the emoji below is used."
+        },
+        {
+          "type": "text",
+          "id": "emoji",
+          "label": "Emoji Icon",
+          "default": "🧸",
+          "info": "Used when no image is uploaded."
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Collection Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Toy Categories",
+      "blocks": [
+        {
+          "type": "category",
+          "settings": {
+            "title": "Playsets",
+            "emoji": "🎠"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Control Toys",
+            "emoji": "🚗"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Educational Toys",
+            "emoji": "🔤"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Eco-Friendly Toys",
+            "emoji": "🐴"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Stuffed Toys",
+            "emoji": "🧸"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
