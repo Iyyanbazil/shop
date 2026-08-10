@@ -3,6 +3,9 @@
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
     background-color: {{ section.settings.background_color }};
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
   }
 
   .recent-photoshoots__header {
@@ -61,7 +64,7 @@
   }
 {%- endstyle -%}
 
-<div class="recent-photoshoots page-width">
+<div class="recent-photoshoots">
   {%- if section.settings.heading != blank or section.settings.subheading != blank -%}
     <div class="recent-photoshoots__header">
       {%- if section.settings.heading != blank -%}

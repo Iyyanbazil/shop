@@ -281,6 +281,7 @@
         "feature_1": {
           "type": "feature",
           "settings": {
+            "icon": "LastHours.png",
             "title": "Customer care",
             "title_color": "#1096b5",
             "description": "24h hour follow up",
@@ -290,6 +291,7 @@
         "feature_2": {
           "type": "feature",
           "settings": {
+            "icon": "FreeShipping.png",
             "title": "Free ship",
             "title_color": "#e07b2a",
             "description": "Free shipping for 150$ and up",
@@ -299,6 +301,7 @@
         "feature_3": {
           "type": "feature",
           "settings": {
+            "icon": "GetCash.png",
             "title": "Return",
             "title_color": "#2a9e5c",
             "description": "Within 7 days",
