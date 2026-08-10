@@ -274,6 +274,47 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "feature_highlights": {
+      "type": "feature-highlights",
+      "blocks": {
+        "feature_1": {
+          "type": "feature",
+          "settings": {
+            "title": "Customer care",
+            "title_color": "#1096b5",
+            "description": "24h hour follow up",
+            "card_bg_color": "#edf6ff"
+          }
+        },
+        "feature_2": {
+          "type": "feature",
+          "settings": {
+            "title": "Free ship",
+            "title_color": "#e07b2a",
+            "description": "Free shipping for 150$ and up",
+            "card_bg_color": "#fff5ec"
+          }
+        },
+        "feature_3": {
+          "type": "feature",
+          "settings": {
+            "title": "Return",
+            "title_color": "#2a9e5c",
+            "description": "Within 7 days",
+            "card_bg_color": "#edfaf3"
+          }
+        }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2",
+        "feature_3"
+      ],
+      "settings": {
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
     }
   },
   "order": [
@@ -283,6 +324,7 @@
     "toy_promo_banner",
     "customer_loves",
     "1786110080dc27c37a",
-    "recent_photoshoots"
+    "recent_photoshoots",
+    "feature_highlights"
   ]
 }
