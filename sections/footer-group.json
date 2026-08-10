@@ -30,7 +30,7 @@
           "type": "text",
           "settings": {
             "heading": "My account",
-            "subtext": "<p><a href='/account/orders'>Track my order</a></p><p><a href='/policies/terms-of-service'>Terms of use</a></p><p><a href='/pages/wishlist'>Wishlist</a></p><p><a href='/pages/feedback'>Submit Your feedback</a></p>"
+            "subtext": "<p><a href=\"/account/orders\">Track my order</a></p><p><a href=\"/policies/terms-of-service\">Terms of use</a></p><p><a href=\"/pages/wishlist\">Wishlist</a></p><p><a href=\"/pages/feedback\">Submit Your feedback</a></p>"
           }
         },
         "service_block": {
@@ -58,7 +58,7 @@
         "payment_enable": false,
         "show_policy": false,
         "margin_top": 0,
-        "padding_top": 16,
+        "padding_top": 68,
         "padding_bottom": 100
       }
     }
