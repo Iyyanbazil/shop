@@ -318,6 +318,24 @@
         "padding_top": 40,
         "padding_bottom": 40
       }
+    },
+    "newsletter_section": {
+      "type": "custom-newsletter",
+      "settings": {
+        "heading": "Newsletter",
+        "subtext": "Get 15% off your first purchase! Plus, be the first to know about sales, new product launches, and exclusive offers!",
+        "placeholder": "Enter your email",
+        "btn_label": "Join",
+        "btn_color": "#1096b5",
+        "bg_color": "#ffffff",
+        "heading_size": 36,
+        "subtext_size": 16,
+        "field_height": 50,
+        "field_font_size": 16,
+        "field_radius": 12,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
     }
   },
   "order": [
@@ -328,6 +346,7 @@
     "customer_loves",
     "1786110080dc27c37a",
     "recent_photoshoots",
-    "feature_highlights"
+    "feature_highlights",
+    "newsletter_section"
   ]
 }

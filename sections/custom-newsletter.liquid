@@ -1,0 +1,248 @@
+{%- style -%}
+  .custom-newsletter {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.bg_color }};
+    text-align: center;
+  }
+
+  .custom-newsletter__heading {
+    font-size: {{ section.settings.heading_size }}px;
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+  }
+
+  .custom-newsletter__subtext {
+    font-size: {{ section.settings.subtext_size }}px;
+    color: #555;
+    max-width: 520px;
+    margin: 0 auto 1.6rem;
+    line-height: 1.5;
+  }
+
+  .custom-newsletter__form-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .custom-newsletter__input-wrap {
+    flex: 1;
+  }
+
+  .custom-newsletter__input {
+    width: 100%;
+    height: {{ section.settings.field_height }}px;
+    border: 1px solid #ccc;
+    border-radius: {{ section.settings.field_radius }}px;
+    padding: 0 22px;
+    font-size: {{ section.settings.field_font_size }}px;
+    outline: none;
+    box-sizing: border-box;
+  }
+
+  .custom-newsletter__input:focus {
+    border-color: #1096b5;
+  }
+
+  .custom-newsletter__btn {
+    flex-shrink: 0;
+    background-color: {{ section.settings.btn_color }};
+    color: #ffffff;
+    border: none;
+    border-radius: {{ section.settings.field_radius }}px;
+    padding: 0 28px;
+    height: {{ section.settings.field_height }}px;
+    font-size: {{ section.settings.field_font_size }}px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.2s ease;
+  }
+
+  .custom-newsletter__btn:hover {
+    opacity: 0.88;
+  }
+
+  .custom-newsletter__message {
+    margin-top: 12px;
+    font-size: 0.95rem;
+  }
+
+  .custom-newsletter__message--success {
+    color: #2a9e5c;
+  }
+
+  .custom-newsletter__message--error {
+    color: #c0392b;
+  }
+{%- endstyle -%}
+
+<div class="custom-newsletter">
+  {%- if section.settings.heading != blank -%}
+    <h2 class="custom-newsletter__heading">{{ section.settings.heading }}</h2>
+  {%- endif -%}
+
+  {%- if section.settings.subtext != blank -%}
+    <p class="custom-newsletter__subtext">{{ section.settings.subtext }}</p>
+  {%- endif -%}
+
+  {%- form 'customer', id: 'CustomNewsletterForm', class: 'custom-newsletter__form' -%}
+    <input type="hidden" name="contact[tags]" value="newsletter">
+    <div class="custom-newsletter__form-row">
+      <div class="custom-newsletter__input-wrap">
+        <input
+          id="CustomNewsletter--{{ section.id }}"
+          type="email"
+          name="contact[email]"
+          class="custom-newsletter__input"
+          value="{{ form.email }}"
+          placeholder="{{ section.settings.placeholder }}"
+          aria-required="true"
+          autocomplete="email"
+          {% if form.errors %}autofocus aria-invalid="true"{% endif %}
+          required
+        >
+      </div>
+      <button type="submit" class="custom-newsletter__btn" name="commit">
+        {{ section.settings.btn_label }}
+      </button>
+    </div>
+
+    {%- if form.errors -%}
+      <p class="custom-newsletter__message custom-newsletter__message--error">
+        {{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}
+      </p>
+    {%- endif -%}
+
+    {%- if form.posted_successfully? -%}
+      <p class="custom-newsletter__message custom-newsletter__message--success">
+        {{ 'newsletter.success' | t }}
+      </p>
+    {%- endif -%}
+  {%- endform -%}
+</div>
+
+{% schema %}
+{
+  "name": "Custom Newsletter",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Newsletter"
+    },
+    {
+      "type": "text",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Get 15% off your first purchase! Plus, be the first to know about sales, new product launches, and exclusive offers!"
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Input placeholder",
+      "default": "Enter your email"
+    },
+    {
+      "type": "text",
+      "id": "btn_label",
+      "label": "Button label",
+      "default": "Join"
+    },
+    {
+      "type": "color",
+      "id": "btn_color",
+      "label": "Button color",
+      "default": "#1096b5"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading size",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "subtext_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Subtext size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "field_height",
+      "min": 36,
+      "max": 70,
+      "step": 2,
+      "unit": "px",
+      "label": "Input & button height",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "field_font_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Input & button font size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "field_radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Input & button border radius",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 48
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Newsletter"
+    }
+  ]
+}
+{% endschema %}
