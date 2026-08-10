@@ -5,33 +5,41 @@
 -%}
 
 <style>
+  @keyframes barReveal {
+    from {
+      clip-path: inset(0 0 100% 0);
+    }
+    to {
+      clip-path: inset(0 0 0% 0);
+    }
+  }
+
   .announcement-bar-section {
     position: relative;
     z-index: 10;
-    overflow: visible !important;
+    animation: barReveal 0.35s ease-out both;
   }
 
   .announcement-bar-section .utility-bar {
     background-color: #2986a8;
     position: relative;
-    overflow: visible;
+    overflow: hidden;
+    padding-bottom: 16px;
+    border-bottom: none !important;
   }
 
   .announcement-bar-section .utility-bar::after {
     content: '';
     position: absolute;
-    bottom: -13px;
+    bottom: 0;
     left: 0;
     right: 0;
-    height: 13px;
-    background: radial-gradient(circle at 50% -1px, #2986a8 13px, transparent 13.5px);
-    background-size: 24px 13px;
+    height: 14px;
+    background-color: #ffffff;
+    background-image: radial-gradient(circle at 50% 0, #2986a8 13px, transparent 13.5px);
+    background-size: 26px 14px;
     background-repeat: repeat-x;
     background-position: 0 0;
-  }
-
-  .announcement-bar-section .utility-bar {
-    border-bottom: none !important;
   }
 
   .utility-bar__bar-layout {

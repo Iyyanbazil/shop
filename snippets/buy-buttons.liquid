@@ -60,7 +60,7 @@
           {%- render 'gift-card-recipient-form', product: product, form: form, section: section -%}
         {%- endif -%}
 
-        <div class="product-form__buttons">
+        <div class="product-form__buttons{% if show_wishlist_compare %} product-form__buttons--with-actions{% endif %}">
           {%- liquid
             assign check_against_inventory = true
             if product.selected_or_first_available_variant.inventory_management != 'shopify' or product.selected_or_first_available_variant.inventory_policy == 'continue'
@@ -74,7 +74,7 @@
             id="ProductSubmitButton-{{ section_id }}"
             type="submit"
             name="add"
-            class="product-form__submit button button--full-width {% if show_dynamic_checkout %}button--secondary{% else %}button--primary{% endif %}"
+            class="product-form__submit button {% if show_wishlist_compare %}button--primary product-form__submit--inline{% else %}button--full-width {% if show_dynamic_checkout %}button--secondary{% else %}button--primary{% endif %}{% endif %}"
             {% if product.selected_or_first_available_variant.available == false
               or quantity_rule_soldout
               or product.selected_or_first_available_variant == null
@@ -93,9 +93,30 @@
             </span>
             {%- render 'loading-spinner' -%}
           </button>
-          {%- if show_dynamic_checkout -%}
-            {{ form | payment_button }}
+          {%- if show_wishlist_compare -%}
+            <button type="button" class="product__action-icon-btn" aria-label="Add to wishlist">
+              <span class="svg-wrapper">{{- 'icon-heart.svg' | inline_asset_content -}}</span>
+            </button>
+            <button
+              type="submit"
+              name="add"
+              class="product__action-icon-btn"
+              aria-label="{{ 'products.product.add_to_cart' | t }}"
+              {% if product.selected_or_first_available_variant.available == false
+                or quantity_rule_soldout
+                or product.selected_or_first_available_variant == null
+              %}
+                disabled
+              {% endif %}
+            >
+              <span class="svg-wrapper">{{- 'icon-cart.svg' | inline_asset_content -}}</span>
+            </button>
           {%- endif -%}
+          {%- unless show_wishlist_compare -%}
+            {%- if show_dynamic_checkout -%}
+              {{ form | payment_button }}
+            {%- endif -%}
+          {%- endunless -%}
         </div>
       {%- endform -%}
     </product-form>

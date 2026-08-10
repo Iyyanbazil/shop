@@ -136,8 +136,8 @@
         "products_to_show": 8,
         "image_ratio": "adapt",
         "show_secondary_image": true,
-        "show_rating": false,
-        "quick_add": "none"
+        "show_rating": true,
+        "quick_add": "standard"
       }
     },
     "toy_promo_banner": {
@@ -175,7 +175,7 @@
         "image_ratio": "adapt",
         "show_secondary_image": true,
         "show_rating": true,
-        "quick_add": "none"
+        "quick_add": "standard"
       }
     },
     "1786110080dc27c37a": {

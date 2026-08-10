@@ -497,7 +497,8 @@
                     product: product,
                     product_form_id: product_form_id,
                     section_id: section.id,
-                    show_pickup_availability: true
+                    show_pickup_availability: true,
+                    show_wishlist_compare: true
                   -%}
                 {%- when 'rating' -%}
                   {%- if product.metafields.reviews.rating.value != blank -%}
@@ -688,6 +689,85 @@
                   </product-recommendations>
                 {%- when 'icon-with-text' -%}
                   {% render 'icon-with-text', block: block %}
+
+                {%- when 'social_share_icons' -%}
+                  {%- assign share_url = product.selected_variant.url | default: product.url | prepend: request.origin -%}
+                  <div class="product__social-share" {{ block.shopify_attributes }}>
+                    <span class="product__social-share-label">Share this:</span>
+                    <div class="product__social-share-icons">
+                      <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="product__social-icon" aria-label="Share on Instagram">
+                        <span class="svg-wrapper">{{- 'icon-instagram.svg' | inline_asset_content -}}</span>
+                      </a>
+                      <a href="https://twitter.com/intent/tweet?url={{ share_url | url_encode }}&text={{ product.title | url_encode }}" target="_blank" rel="noopener noreferrer" class="product__social-icon" aria-label="Share on Twitter">
+                        <span class="svg-wrapper">{{- 'icon-twitter.svg' | inline_asset_content -}}</span>
+                      </a>
+                      <a href="https://www.facebook.com/sharer/sharer.php?u={{ share_url | url_encode }}" target="_blank" rel="noopener noreferrer" class="product__social-icon" aria-label="Share on Facebook">
+                        <span class="svg-wrapper">{{- 'icon-facebook.svg' | inline_asset_content -}}</span>
+                      </a>
+                      <a href="https://pinterest.com/pin/create/button/?url={{ share_url | url_encode }}&description={{ product.title | url_encode }}" target="_blank" rel="noopener noreferrer" class="product__social-icon" aria-label="Share on Pinterest">
+                        <span class="svg-wrapper">{{- 'icon-pinterest.svg' | inline_asset_content -}}</span>
+                      </a>
+                    </div>
+                  </div>
+
+                {%- when 'short_description' -%}
+                  <div class="product__short-desc" {{ block.shopify_attributes }}>
+                    <h3 class="product__short-desc-title">Short description</h3>
+                    <table class="product__short-desc-table">
+                      <tbody>
+                        <tr>
+                          {%- if product.selected_or_first_available_variant.sku != blank -%}
+                            <td class="product__short-desc-key">SKU:</td>
+                            <td class="product__short-desc-val">{{ product.selected_or_first_available_variant.sku }}</td>
+                          {%- endif -%}
+                          {%- if product.type != blank -%}
+                            <td class="product__short-desc-key">Category:</td>
+                            <td class="product__short-desc-val">{{ product.type }}</td>
+                          {%- endif -%}
+                        </tr>
+                        {%- if product.tags.size > 0 -%}
+                          <tr>
+                            <td class="product__short-desc-key">Tags:</td>
+                            <td class="product__short-desc-val">{{ product.tags | join: ', ' }}</td>
+                            {%- if product.metafields.custom.exp != blank -%}
+                              <td class="product__short-desc-key">EXP:</td>
+                              <td class="product__short-desc-val">{{ product.metafields.custom.exp }}</td>
+                            {%- endif -%}
+                          </tr>
+                        {%- endif -%}
+                      </tbody>
+                    </table>
+                  </div>
+
+                {%- when 'safe_checkout' -%}
+                  <div class="product__safe-checkout" {{ block.shopify_attributes }}>
+                    <div class="product__safe-checkout-header">
+                      <span class="svg-wrapper product__safe-checkout-lock">{{- 'icon-padlock.svg' | inline_asset_content -}}</span>
+                      <span class="product__safe-checkout-title">Guaranteed Safe Checkout</span>
+                    </div>
+                    <div class="product__safe-checkout-badges">
+                      <span class="product__payment-badge product__payment-badge--visa">
+                        <svg viewBox="0 0 60 20" width="40" height="14" aria-label="Visa"><text x="0" y="15" font-family="Arial" font-size="14" font-weight="bold" fill="#1a1f71">VISA</text></svg>
+                      </span>
+                      <span class="product__payment-badge">
+                        <svg viewBox="0 0 38 24" width="36" height="24" aria-label="Mastercard">
+                          <circle cx="13" cy="12" r="10" fill="#eb001b"/>
+                          <circle cx="25" cy="12" r="10" fill="#f79e1b"/>
+                          <path d="M19 5.4a10 10 0 0 1 0 13.2A10 10 0 0 1 19 5.4z" fill="#ff5f00"/>
+                        </svg>
+                      </span>
+                      <span class="product__payment-badge">
+                        <svg viewBox="0 0 50 20" width="44" height="16" aria-label="American Express"><text x="0" y="14" font-family="Arial" font-size="11" font-weight="bold" fill="#2e77bc">AMEX</text></svg>
+                      </span>
+                      <span class="product__payment-badge">
+                        <svg viewBox="0 0 66 20" width="54" height="14" aria-label="Discover"><text x="0" y="14" font-family="Arial" font-size="11" font-weight="bold" fill="#f76f20">Discover</text></svg>
+                      </span>
+                      <span class="product__payment-badge">
+                        <svg viewBox="0 0 62 20" width="50" height="14" aria-label="PayPal"><text x="0" y="14" font-family="Arial" font-size="11" font-weight="bold" fill="#003087">Pay<tspan fill="#009cde">Pal</tspan></text></svg>
+                      </span>
+                    </div>
+                  </div>
+
               {%- endcase -%}
             {%- endfor -%}
             <a href="{{ product.url }}" class="link product__view-details animate-arrow">
@@ -2144,6 +2224,21 @@
           "info": "t:sections.main-product.blocks.icon_with_text.settings.heading.info"
         }
       ]
+    },
+    {
+      "type": "social_share_icons",
+      "name": "Social Share Icons",
+      "limit": 1
+    },
+    {
+      "type": "short_description",
+      "name": "Short Description",
+      "limit": 1
+    },
+    {
+      "type": "safe_checkout",
+      "name": "Safe Checkout",
+      "limit": 1
     }
   ],
   "settings": [

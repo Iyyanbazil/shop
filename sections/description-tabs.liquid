@@ -1,0 +1,192 @@
+<style>
+  .description-tabs {
+    margin: 0 auto;
+  }
+
+  .description-tabs__nav {
+    display: flex;
+    justify-content: center;
+    border-bottom: 0.2rem solid rgba(var(--color-foreground), 0.1);
+    gap: 0;
+    margin-top: 4rem;
+  }
+
+  .description-tabs__tab {
+    position: relative;
+    padding: 1.2rem 2.4rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: rgba(var(--color-foreground), 0.55);
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.2s;
+    letter-spacing: 0.02em;
+  }
+
+  .description-tabs__tab::after {
+    content: '';
+    position: absolute;
+    bottom: -0.2rem;
+    left: 0;
+    right: 0;
+    height: 0.2rem;
+    background: rgb(var(--color-foreground));
+    transform: scaleX(0);
+    transition: transform 0.2s;
+  }
+
+  .description-tabs__tab.active {
+    color: rgb(var(--color-foreground));
+    font-weight: 600;
+  }
+
+  .description-tabs__tab.active::after {
+    transform: scaleX(1);
+  }
+
+  .description-tabs__tab:hover {
+    color: rgb(var(--color-foreground));
+  }
+
+  .description-tabs__panel {
+    display: none;
+    padding: 2.4rem 0;
+  }
+
+  .description-tabs__panel.active {
+    display: block;
+  }
+
+  .description-tabs__panel .rte p {
+    margin-bottom: 1rem;
+    line-height: 1.7;
+  }
+</style>
+
+<div class="description-tabs section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
+  <div class="page-width">
+    <nav class="description-tabs__nav" role="tablist" aria-label="Product information tabs">
+      <button
+        class="description-tabs__tab"
+        role="tab"
+        aria-selected="false"
+        aria-controls="tab-panel-description-{{ section.id }}"
+        id="tab-description-{{ section.id }}"
+        data-tab="description"
+      >
+        Description
+      </button>
+      <button
+        class="description-tabs__tab active"
+        role="tab"
+        aria-selected="true"
+        aria-controls="tab-panel-reviews-{{ section.id }}"
+        id="tab-reviews-{{ section.id }}"
+        data-tab="reviews"
+      >
+        {%- if product.metafields.reviews.rating_count != blank -%}
+          Reviews ({{ product.metafields.reviews.rating_count }})
+        {%- else -%}
+          Reviews
+        {%- endif -%}
+      </button>
+    </nav>
+
+    <div
+      id="tab-panel-description-{{ section.id }}"
+      class="description-tabs__panel rte"
+      role="tabpanel"
+      aria-labelledby="tab-description-{{ section.id }}"
+    >
+      {{ product.description }}
+    </div>
+
+    <div
+      id="tab-panel-reviews-{{ section.id }}"
+      class="description-tabs__panel active"
+      role="tabpanel"
+      aria-labelledby="tab-reviews-{{ section.id }}"
+    >
+      {%- for block in section.blocks -%}
+        {%- if block.type == '@app' -%}
+          {% render block %}
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var container = document.querySelector('.description-tabs[class*="section-{{ section.id }}"]') ||
+                    document.querySelector('.description-tabs');
+    if (!container) return;
+
+    var tabs = container.querySelectorAll('.description-tabs__tab');
+    var panels = container.querySelectorAll('.description-tabs__panel');
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        tabs.forEach(function (t) {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        panels.forEach(function (p) { p.classList.remove('active'); });
+
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+
+        var panelId = tab.getAttribute('aria-controls');
+        var panel = document.getElementById(panelId);
+        if (panel) panel.classList.add('active');
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Description Tabs",
+  "tag": "section",
+  "class": "section",
+  "blocks": [
+    {
+      "type": "@app"
+    }
+  ],
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Description Tabs"
+    }
+  ]
+}
+{% endschema %}

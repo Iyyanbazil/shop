@@ -1492,3 +1492,241 @@ a.product__text {
     border: none;
   }
 }
+
+/* ============================================================
+   Buy buttons with wishlist/compare row
+   ============================================================ */
+
+.product-form__buttons--with-actions {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 0.8rem;
+  flex-wrap: nowrap;
+}
+
+.product-form__buttons--with-actions .product-form__submit {
+  margin-bottom: 0;
+}
+
+.product-form__submit--inline {
+  flex: 1;
+  min-width: 0;
+}
+
+.product__action-icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.4rem;
+  flex-shrink: 0;
+  border: 0.1rem solid rgba(var(--color-foreground), 0.2);
+  border-radius: var(--buttons-radius, 0.4rem);
+  background: transparent;
+  color: rgba(var(--color-foreground), 0.6);
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+  padding: 0;
+}
+
+.product__action-icon-btn:hover:not(:disabled) {
+  border-color: rgba(var(--color-foreground), 0.6);
+  color: rgb(var(--color-foreground));
+}
+
+.product__action-icon-btn:disabled,
+.product__action-icon-btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.product__action-icon-btn .svg-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+}
+
+.product__action-icon-btn svg {
+  width: 2rem;
+  height: 2rem;
+}
+
+/* ============================================================
+   Social Share Icons
+   ============================================================ */
+
+.product__social-share {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 1rem 0;
+}
+
+.product__social-share-label {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: rgb(var(--color-foreground));
+  white-space: nowrap;
+}
+
+.product__social-share-icons {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.product__social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.4rem;
+  height: 3.4rem;
+  border: 0.1rem solid rgba(var(--color-foreground), 0.15);
+  border-radius: 50%;
+  color: rgba(var(--color-foreground), 0.65);
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s, background-color 0.2s;
+}
+
+.product__social-icon:hover {
+  border-color: rgba(var(--color-foreground), 0.5);
+  color: rgb(var(--color-foreground));
+  background-color: rgba(var(--color-foreground), 0.05);
+}
+
+.product__social-icon .svg-wrapper {
+  display: flex;
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
+.product__social-icon svg {
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
+/* ============================================================
+   Short Description Table
+   ============================================================ */
+
+.product__short-desc {
+  border: 0.1rem solid rgba(var(--color-foreground), 0.12);
+  border-radius: 0.6rem;
+  padding: 1.4rem 1.6rem;
+  margin: 1.5rem 0;
+}
+
+.product__short-desc-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+  color: rgb(var(--color-foreground));
+}
+
+.product__short-desc-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.3rem;
+}
+
+.product__short-desc-table tr + tr td {
+  padding-top: 0.6rem;
+}
+
+.product__short-desc-key {
+  color: rgba(var(--color-foreground), 0.6);
+  white-space: nowrap;
+  padding-right: 0.8rem;
+  width: 1%;
+  font-weight: 500;
+}
+
+.product__short-desc-val {
+  color: rgb(var(--color-foreground));
+  padding-right: 1.6rem;
+}
+
+/* ============================================================
+   Safe Checkout
+   ============================================================ */
+
+.product__safe-checkout {
+  border: 0.1rem solid rgba(var(--color-foreground), 0.12);
+  border-radius: 0.6rem;
+  padding: 1.4rem 1.6rem;
+  margin: 1.5rem 0;
+}
+
+.product__safe-checkout-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.product__safe-checkout-lock {
+  display: flex;
+  width: 1.8rem;
+  height: 1.8rem;
+  color: rgba(var(--color-foreground), 0.6);
+}
+
+.product__safe-checkout-lock svg {
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
+.product__safe-checkout-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: rgba(var(--color-foreground), 0.8);
+}
+
+.product__safe-checkout-badges {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.product__payment-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0.1rem solid rgba(var(--color-foreground), 0.15);
+  border-radius: 0.4rem;
+  padding: 0.3rem 0.6rem;
+  background: rgb(var(--color-background));
+  line-height: 1;
+}
+
+.product__qty-cart-row {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.product__qty-cart-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.5rem;
+  height: 4.5rem;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.product__qty-cart-btn .svg-wrapper svg {
+  width: 1.8rem;
+  height: 1.8rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
