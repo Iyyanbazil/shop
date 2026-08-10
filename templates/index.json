@@ -268,7 +268,7 @@
         "subheading": "Check gallery",
         "heading_size": 36,
         "image_height": 300,
-        "gap": 4,
+        "gap": 0,
         "border_radius": 0,
         "background_color": "#ffffff",
         "padding_top": 36,
