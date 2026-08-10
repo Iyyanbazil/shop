@@ -1,45 +1,151 @@
-<span class="field-currency">{{ cart.currency.symbol }}</span>
+{%- if filter_type == 'vertical' -%}
+  {%- liquid
+    assign price_max = filter.range_max | money_without_currency | strip | remove: ','
+    assign cur_min = filter.min_value.value | default: 0 | money_without_currency | strip | remove: ','
+    assign cur_max = filter.max_value.value | money_without_currency | strip | remove: ','
+    if cur_max == blank
+      assign cur_max = price_max
+    endif
+    if cur_min == blank
+      assign cur_min = '0'
+    endif
+  -%}
 
-<div class="field">
-  <input
-    class="field__input"
-    name="{{ filter.min_value.param_name }}"
-    id="{{ id_prefix }}{{ filter.label | escape }}-GTE"
-    {%- if filter.min_value.value -%}
-      value="{{ filter.min_value.value | money_without_currency }}"
-    {%- endif -%}
-    type="text"
-    inputmode="decimal"
-    placeholder="0"
-    data-pattern="\d| |,|\."
-    data-min="0"
-    data-max="{{ filter.range_max | money_without_currency }}"
-  >
-  <label class="field__label" for="{{ id_prefix }}{{ filter.label | escape }}-GTE">
-    {{- 'products.facets.from' | t -}}
-  </label>
-</div>
+  <div class="price-range-ui">
+    <div class="price-range-ui__slider-wrap">
+      <div class="price-range-ui__track">
+        <div class="price-range-ui__fill"></div>
+      </div>
+      <input type="range"
+        class="price-range-ui__input price-range-ui__input--min"
+        min="0" max="{{ price_max }}" value="{{ cur_min }}" step="1"
+        data-min="0" data-max="{{ price_max }}"
+        aria-label="{{ 'products.facets.from' | t }}">
+      <input type="range"
+        class="price-range-ui__input price-range-ui__input--max"
+        min="0" max="{{ price_max }}" value="{{ cur_max }}" step="1"
+        data-min="0" data-max="{{ price_max }}"
+        aria-label="{{ 'products.facets.to' | t }}">
+    </div>
 
-{%- if filter_type != 'vertical' -%}
+    <div class="price-range-ui__values">
+      <span class="price-range-ui__val-min">{{ cart.currency.symbol }}{{ cur_min }}</span>
+      <span class="price-range-ui__val-max">{{ cart.currency.symbol }}{{ cur_max }}</span>
+    </div>
+
+    <input type="text" class="visually-hidden"
+      name="{{ filter.min_value.param_name }}"
+      id="{{ id_prefix }}{{ filter.label | escape }}-GTE"
+      value="{{ filter.min_value.value | money_without_currency | strip | remove: ',' | default: '' }}"
+      data-price-input="min" data-min="0" data-max="{{ price_max }}"
+      aria-hidden="true" tabindex="-1">
+    <input type="text" class="visually-hidden"
+      name="{{ filter.max_value.param_name }}"
+      id="{{ id_prefix }}{{ filter.label | escape }}-LTE"
+      placeholder="{{ price_max }}"
+      value="{{ filter.max_value.value | money_without_currency | strip | remove: ',' | default: '' }}"
+      data-price-input="max" data-min="0" data-max="{{ price_max }}"
+      aria-hidden="true" tabindex="-1">
+
+    <div class="price-range-ui__footer">
+      <button type="button" class="price-range-ui__apply">Apply</button>
+    </div>
+  </div>
+
+  <script>
+  (function() {
+    var slider = document.querySelector('.price-range-ui:not([data-ready])');
+    if (!slider) return;
+    slider.setAttribute('data-ready', '1');
+
+    var minThumb  = slider.querySelector('.price-range-ui__input--min');
+    var maxThumb  = slider.querySelector('.price-range-ui__input--max');
+    var track     = slider.querySelector('.price-range-ui__track');
+    var minVal    = slider.querySelector('.price-range-ui__val-min');
+    var maxVal    = slider.querySelector('.price-range-ui__val-max');
+    var minHidden = slider.querySelector('[data-price-input="min"]');
+    var maxHidden = slider.querySelector('[data-price-input="max"]');
+    var applyBtn  = slider.querySelector('.price-range-ui__apply');
+    var currency  = '{{ cart.currency.symbol }}';
+    var maxRange  = parseFloat(minThumb.max);
+
+    function update() {
+      var lo = parseFloat(minThumb.value);
+      var hi = parseFloat(maxThumb.value);
+      track.style.setProperty('--pf-min', (lo / maxRange * 100) + '%');
+      track.style.setProperty('--pf-max', (hi / maxRange * 100) + '%');
+      minVal.textContent = currency + lo.toFixed(2);
+      maxVal.textContent = currency + hi.toFixed(2);
+    }
+
+    minThumb.addEventListener('input', function(e) {
+      e.stopPropagation();
+      if (parseFloat(minThumb.value) > parseFloat(maxThumb.value)) minThumb.value = maxThumb.value;
+      update();
+    });
+
+    maxThumb.addEventListener('input', function(e) {
+      e.stopPropagation();
+      if (parseFloat(maxThumb.value) < parseFloat(minThumb.value)) maxThumb.value = minThumb.value;
+      update();
+    });
+
+    applyBtn.addEventListener('click', function() {
+      var lo = parseFloat(minThumb.value);
+      var hi = parseFloat(maxThumb.value);
+      minHidden.value = lo > 0 ? lo.toFixed(2) : '';
+      maxHidden.value = hi < maxRange ? hi.toFixed(2) : '';
+      minHidden.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+
+    update();
+  })();
+  </script>
+
+{%- else -%}
   <span class="field-currency">{{ cart.currency.symbol }}</span>
-{%- endif -%}
 
-<div class="field">
-  <input
-    class="field__input"
-    name="{{ filter.max_value.param_name }}"
-    id="{{ id_prefix }}{{ filter.label | escape }}-LTE"
-    {%- if filter.max_value.value -%}
-      value="{{ filter.max_value.value | money_without_currency }}"
-    {%- endif -%}
-    type="text"
-    inputmode="decimal"
-    placeholder="{{ filter.range_max | money_without_currency }}"
-    data-pattern="\d| |,|\."
-    data-min="0"
-    data-max="{{ filter.range_max | money_without_currency }}"
-  >
-  <label class="field__label" for="{{ id_prefix }}{{ filter.label | escape }}-LTE">
-    {{- 'products.facets.to' | t -}}
-  </label>
-</div>
+  <div class="field">
+    <input
+      class="field__input"
+      name="{{ filter.min_value.param_name }}"
+      id="{{ id_prefix }}{{ filter.label | escape }}-GTE"
+      {%- if filter.min_value.value -%}
+        value="{{ filter.min_value.value | money_without_currency }}"
+      {%- endif -%}
+      type="text"
+      inputmode="decimal"
+      placeholder="0"
+      data-pattern="\d| |,|\."
+      data-min="0"
+      data-max="{{ filter.range_max | money_without_currency }}"
+    >
+    <label class="field__label" for="{{ id_prefix }}{{ filter.label | escape }}-GTE">
+      {{- 'products.facets.from' | t -}}
+    </label>
+  </div>
+
+  {%- if filter_type != 'vertical' -%}
+    <span class="field-currency">{{ cart.currency.symbol }}</span>
+  {%- endif -%}
+
+  <div class="field">
+    <input
+      class="field__input"
+      name="{{ filter.max_value.param_name }}"
+      id="{{ id_prefix }}{{ filter.label | escape }}-LTE"
+      {%- if filter.max_value.value -%}
+        value="{{ filter.max_value.value | money_without_currency }}"
+      {%- endif -%}
+      type="text"
+      inputmode="decimal"
+      placeholder="{{ filter.range_max | money_without_currency }}"
+      data-pattern="\d| |,|\."
+      data-min="0"
+      data-max="{{ filter.range_max | money_without_currency }}"
+    >
+    <label class="field__label" for="{{ id_prefix }}{{ filter.label | escape }}-LTE">
+      {{- 'products.facets.to' | t -}}
+    </label>
+  </div>
+{%- endif -%}
