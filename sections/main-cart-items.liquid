@@ -30,11 +30,13 @@
   view-event-payload="{{ cart | standard_event_data: 'view', context: 'page' | escape }}"
 >
   <div class="page-width">
+    <nav class="cart-breadcrumb" aria-label="breadcrumb">
+      <a href="{{ routes.root_url }}">Home</a>
+      <span aria-hidden="true"> / </span>
+      <span>{{ 'sections.cart.title' | t }}</span>
+    </nav>
     <div class="title-wrapper-with-link">
-      <h1 class="title title--primary">{{ 'sections.cart.title' | t }}</h1>
-      <a href="{{ routes.all_products_collection_url }}" class="underlined-link">
-        {{- 'general.continue_shopping' | t -}}
-      </a>
+      <h1 class="title title--primary cart-page-title">{{ 'sections.cart.title' | t }}</h1>
     </div>
 
     <div class="cart__warnings">
@@ -75,7 +77,7 @@
                     {{ 'sections.cart.headings.quantity' | t }}
                   </th>
                   <th class="small-hide right caption-with-letter-spacing" colspan="1" scope="col">
-                    {{ 'sections.cart.headings.total' | t }}
+                    Subtotal
                   </th>
                 </tr>
               </thead>
