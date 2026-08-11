@@ -9,7 +9,7 @@
   font-size: 1.5rem;
   font-weight: 500;
   color: rgba(var(--color-foreground), 0.6);
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .checkout-breadcrumb a {
@@ -21,68 +21,74 @@
   text-decoration: underline;
 }
 
-/* Outer card */
-.checkout-card {
-  border: 0.15rem dashed rgba(var(--color-foreground), 0.18);
-  border-radius: 0.8rem;
-  padding: 3rem;
-  background: rgb(var(--color-background));
-}
-
-/* Title */
+/* Page title */
 .checkout-title {
   font-size: 2.8rem;
   font-weight: 900;
   margin: 0 0 2.5rem 0;
   -webkit-text-stroke: 0.4px currentColor;
-  border-bottom: 0.15rem dashed rgba(var(--color-foreground), 0.15);
-  padding-bottom: 2rem;
 }
 
 /* Two-column layout */
 .checkout-layout {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 3rem;
+  gap: 2rem;
+  align-items: start;
 }
 
 @media screen and (min-width: 900px) {
   .checkout-layout {
     grid-template-columns: 1.3fr 1fr;
-    gap: 4rem;
+    gap: 3rem;
   }
 }
 
-/* ---- Left: Delivery + Payment ---- */
+/* ---- Separate section cards ---- */
+
+.checkout-section-card {
+  border: 0.1rem solid rgba(var(--color-foreground), 0.14);
+  border-radius: 0.8rem;
+  padding: 2.4rem;
+  background: rgb(var(--color-background));
+  margin-bottom: 1.6rem;
+}
+
+.checkout-section-card:last-of-type {
+  margin-bottom: 0;
+}
 
 .checkout-section-title {
-  font-size: 1.8rem;
+  font-size: 1.7rem;
   font-weight: 700;
-  margin: 0 0 2rem 0;
+  margin: 0 0 1.8rem 0;
+  padding-bottom: 1.2rem;
+  border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
 }
+
+/* ---- Form fields ---- */
 
 .checkout-form {
   display: flex;
   flex-direction: column;
-  gap: 0;
 }
 
 .checkout-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
+  gap: 1.2rem;
 }
 
 .checkout-field {
   display: flex;
   flex-direction: column;
-  margin-bottom: 1.6rem;
+  margin-bottom: 1.4rem;
 }
 
 .checkout-field label {
   font-size: 1.3rem;
   font-weight: 600;
-  color: rgba(var(--color-foreground), 0.75);
+  color: rgba(var(--color-foreground), 0.7);
   margin-bottom: 0.5rem;
 }
 
@@ -127,17 +133,12 @@
   min-height: 9rem;
 }
 
-/* Payment section */
-.checkout-payment {
-  margin-top: 1rem;
-  border-top: 0.1rem solid rgba(var(--color-foreground), 0.1);
-  padding-top: 2rem;
-}
+/* ---- Payment ---- */
 
 .checkout-payment-note {
   font-size: 1.3rem;
   color: rgba(var(--color-foreground), 0.55);
-  margin: 0 0 1.6rem 0;
+  margin: 0 0 1.4rem 0;
   display: flex;
   align-items: center;
   gap: 0.6rem;
@@ -160,17 +161,17 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.2rem 1.5rem;
-  cursor: pointer;
+  padding: 1.2rem 1.4rem;
   background: rgba(var(--color-foreground), 0.02);
 }
 
 .checkout-payment-option__label {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.8rem;
   font-size: 1.4rem;
   font-weight: 500;
+  cursor: pointer;
 }
 
 .checkout-payment-option__label input[type="radio"] {
@@ -186,30 +187,99 @@
   align-items: center;
 }
 
-.checkout-card-logos span {
+/* Base card badge */
+.checkout-card-logos > span {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 3.6rem;
-  height: 2.2rem;
-  border: 0.1rem solid rgba(var(--color-foreground), 0.12);
-  border-radius: 0.3rem;
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: rgba(var(--color-foreground), 0.7);
-  background: #fff;
+  width: 3.8rem;
+  height: 2.4rem;
+  border-radius: 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  border: 0.1rem solid rgba(0,0,0,0.08);
+  overflow: hidden;
 }
 
-.checkout-card-logos .visa { color: #1a1f71; }
-.checkout-card-logos .mc { color: #eb001b; }
-.checkout-card-logos .amex { color: #007bc1; }
+/* Visa */
+.cc-visa {
+  background: #1a1f71;
+  color: #fff;
+  font-size: 0.9rem;
+  font-style: italic;
+  letter-spacing: 0.02em;
+}
+
+/* Mastercard — two overlapping circles */
+.cc-mc {
+  background: #fff;
+  position: relative;
+  gap: 0;
+}
+.cc-mc__left,
+.cc-mc__right {
+  display: block;
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 50%;
+  position: absolute;
+}
+.cc-mc__left  { background: #eb001b; left: 0.4rem; }
+.cc-mc__right { background: #f79e1b; right: 0.4rem; mix-blend-mode: multiply; }
+
+/* Amex */
+.cc-amex {
+  background: #016fd0;
+  color: #fff;
+  font-size: 0.72rem;
+}
+
+/* Discover */
+.cc-discover {
+  background: #fff;
+  color: #231f20;
+  font-size: 0.65rem;
+  font-weight: 700;
+  position: relative;
+  justify-content: flex-start;
+  padding-left: 0.4rem;
+}
+.cc-discover span {
+  display: none;
+}
+.cc-discover::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 1.6rem;
+  background: radial-gradient(circle at 60% 50%, #f76f20 40%, #e8e8e8 41%);
+  border-radius: 0 0.3rem 0.3rem 0;
+}
+
+/* UnionPay */
+.cc-union {
+  background: linear-gradient(135deg, #c0392b 50%, #2c3e8a 50%);
+  color: #fff;
+  font-size: 0.75rem;
+}
 
 .checkout-payment-fields {
-  padding: 1.5rem;
+  padding: 1.4rem;
   border-top: 0.1rem solid rgba(var(--color-foreground), 0.1);
-  display: flex;
-  flex-direction: column;
-  gap: 0;
+}
+
+/* Cash on Delivery */
+.checkout-payment-option--cod {
+  margin-bottom: 0;
+}
+
+.cod-icon {
+  display: inline-flex;
+  align-items: center;
+  color: #2e7d32;
 }
 
 .checkout-checkbox-row {
@@ -218,6 +288,7 @@
   gap: 0.8rem;
   margin-bottom: 1rem;
   font-size: 1.4rem;
+  cursor: pointer;
 }
 
 .checkout-checkbox-row input[type="checkbox"] {
@@ -228,20 +299,24 @@
   flex-shrink: 0;
 }
 
-/* Place order button */
+/* Place order button — lives inside the payment card */
 .checkout-submit {
+  display: block;
   width: 100%;
   padding: 1.5rem 2rem;
   background-color: #1a9cbf;
   color: #fff;
   border: none;
-  border-radius: 1rem;
+  border-radius: 5rem;
   font-size: 1.6rem;
   font-weight: 700;
   cursor: pointer;
   letter-spacing: 0.02em;
-  margin-top: 2rem;
+  margin-top: 1.6rem;
+  text-align: center;
+  text-decoration: none;
   transition: background-color 0.2s;
+  box-sizing: border-box;
 }
 
 .checkout-submit:hover {
@@ -250,15 +325,21 @@
 
 /* ---- Right: Your Order ---- */
 
-.checkout-order {
+.checkout-right {
   position: sticky;
   top: 2rem;
 }
 
 .checkout-order-title {
-  font-size: 1.8rem;
+  font-size: 1.7rem;
   font-weight: 700;
-  margin: 0 0 1.5rem 0;
+  margin: 0 0 0 0;
+}
+
+.checkout-section-card .checkout-order-title {
+  padding-bottom: 1.2rem;
+  border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
+  margin-bottom: 0;
 }
 
 .checkout-order-items {
@@ -269,7 +350,7 @@
 .checkout-order-item {
   display: flex;
   align-items: center;
-  gap: 1.4rem;
+  gap: 1.2rem;
   padding: 1.4rem 0;
   border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
 }
@@ -279,8 +360,8 @@
 }
 
 .checkout-order-item__image {
-  width: 6.4rem;
-  height: 6.4rem;
+  width: 6rem;
+  height: 6rem;
   flex-shrink: 0;
   border-radius: 0.6rem;
   overflow: hidden;
@@ -302,9 +383,6 @@
   font-size: 1.4rem;
   font-weight: 600;
   margin: 0 0 0.3rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .checkout-order-item__qty {
@@ -321,25 +399,25 @@
 
 /* Totals */
 .checkout-totals {
-  margin-top: 1.5rem;
-  border-top: 0.1rem solid rgba(var(--color-foreground), 0.12);
-  padding-top: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
+  margin-top: 0.5rem;
+  border-top: 0.1rem solid rgba(var(--color-foreground), 0.1);
+  padding-top: 0.5rem;
 }
 
 .checkout-totals__row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.8rem 0;
+  padding: 0.9rem 0;
   font-size: 1.5rem;
   border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.06);
 }
 
 .checkout-totals__row:last-child {
   border-bottom: none;
+}
+
+.checkout-totals__row--grand {
   font-weight: 700;
   font-size: 1.6rem;
   padding-top: 1.2rem;
@@ -349,7 +427,7 @@
   color: rgba(var(--color-foreground), 0.75);
 }
 
-.checkout-totals__row:last-child .checkout-totals__label {
+.checkout-totals__row--grand .checkout-totals__label {
   color: rgb(var(--color-foreground));
 }
 

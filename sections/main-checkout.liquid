@@ -9,27 +9,28 @@
     <span>Checkout</span>
   </nav>
 
-  <!-- Outer card -->
-  <div class="checkout-card">
-    <h1 class="checkout-title">Check out</h1>
+  <!-- Page heading -->
+  <h1 class="checkout-title">Check out</h1>
 
-    <div class="checkout-layout">
+  <div class="checkout-layout">
 
-      <!-- ===== LEFT: Delivery + Payment ===== -->
-      <div class="checkout-left">
-        <form action="{{ routes.cart_url }}" method="post" class="checkout-form">
-          <input type="hidden" name="checkout" value="1">
+    <!-- ===== LEFT: Delivery + Payment ===== -->
+    <div class="checkout-left">
+      <form action="{{ routes.cart_url }}" method="post" class="checkout-form">
+        <input type="hidden" name="checkout" value="1">
 
+        <!-- Delivery info card -->
+        <div class="checkout-section-card">
           <h2 class="checkout-section-title">Delivery info</h2>
 
           <div class="checkout-row">
             <div class="checkout-field">
               <label for="co-first-name">First name *</label>
-              <input type="text" id="co-first-name" name="attributes[first_name]" placeholder="Join" required>
+              <input type="text" id="co-first-name" name="attributes[first_name]" placeholder="First name" required>
             </div>
             <div class="checkout-field">
               <label for="co-last-name">Last name *</label>
-              <input type="text" id="co-last-name" name="attributes[last_name]" placeholder="Gray" required>
+              <input type="text" id="co-last-name" name="attributes[last_name]" placeholder="Last name" required>
             </div>
           </div>
 
@@ -47,56 +48,23 @@
               <label for="co-state">State *</label>
               <select id="co-state" name="attributes[state]" required>
                 <option value="" disabled selected>State</option>
-                <option>Alabama</option>
-                <option>Alaska</option>
-                <option>Arizona</option>
-                <option>Arkansas</option>
-                <option>California</option>
-                <option>Colorado</option>
-                <option>Connecticut</option>
-                <option>Delaware</option>
-                <option>Florida</option>
-                <option>Georgia</option>
-                <option>Hawaii</option>
-                <option>Idaho</option>
-                <option>Illinois</option>
-                <option>Indiana</option>
-                <option>Iowa</option>
-                <option>Kansas</option>
-                <option>Kentucky</option>
-                <option>Louisiana</option>
-                <option>Maine</option>
-                <option>Maryland</option>
-                <option>Massachusetts</option>
-                <option>Michigan</option>
-                <option>Minnesota</option>
-                <option>Mississippi</option>
-                <option>Missouri</option>
-                <option>Montana</option>
-                <option>Nebraska</option>
-                <option>Nevada</option>
-                <option>New Hampshire</option>
-                <option>New Jersey</option>
-                <option>New Mexico</option>
-                <option>New York</option>
-                <option>North Carolina</option>
-                <option>North Dakota</option>
-                <option>Ohio</option>
-                <option>Oklahoma</option>
-                <option>Oregon</option>
-                <option>Pennsylvania</option>
-                <option>Rhode Island</option>
-                <option>South Carolina</option>
-                <option>South Dakota</option>
-                <option>Tennessee</option>
-                <option>Texas</option>
-                <option>Utah</option>
-                <option>Vermont</option>
-                <option>Virginia</option>
-                <option>Washington</option>
-                <option>West Virginia</option>
-                <option>Wisconsin</option>
-                <option>Wyoming</option>
+                <option>Alabama</option><option>Alaska</option><option>Arizona</option>
+                <option>Arkansas</option><option>California</option><option>Colorado</option>
+                <option>Connecticut</option><option>Delaware</option><option>Florida</option>
+                <option>Georgia</option><option>Hawaii</option><option>Idaho</option>
+                <option>Illinois</option><option>Indiana</option><option>Iowa</option>
+                <option>Kansas</option><option>Kentucky</option><option>Louisiana</option>
+                <option>Maine</option><option>Maryland</option><option>Massachusetts</option>
+                <option>Michigan</option><option>Minnesota</option><option>Mississippi</option>
+                <option>Missouri</option><option>Montana</option><option>Nebraska</option>
+                <option>Nevada</option><option>New Hampshire</option><option>New Jersey</option>
+                <option>New Mexico</option><option>New York</option><option>North Carolina</option>
+                <option>North Dakota</option><option>Ohio</option><option>Oklahoma</option>
+                <option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option>
+                <option>South Carolina</option><option>South Dakota</option><option>Tennessee</option>
+                <option>Texas</option><option>Utah</option><option>Vermont</option>
+                <option>Virginia</option><option>Washington</option><option>West Virginia</option>
+                <option>Wisconsin</option><option>Wyoming</option>
               </select>
             </div>
           </div>
@@ -117,126 +85,140 @@
             <input type="email" id="co-email" name="attributes[email]" placeholder="Example@youremail.com" required>
           </div>
 
-          <div class="checkout-field">
-            <label for="co-notes">Order notes (optional) *</label>
+          <div class="checkout-field" style="margin-bottom:0;">
+            <label for="co-notes">Order notes (optional)</label>
             <textarea id="co-notes" name="note" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
           </div>
+        </div>
 
-          <!-- Payment -->
-          <div class="checkout-payment">
-            <h2 class="checkout-section-title">Payment</h2>
-            <p class="checkout-payment-note">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-              All transactions are secure and encrypted.
-            </p>
+        <!-- Payment card -->
+        <div class="checkout-section-card">
+          <h2 class="checkout-section-title">Payment</h2>
+          <p class="checkout-payment-note">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            All transactions are secure and encrypted.
+          </p>
 
-            <!-- Credit card option -->
-            <div class="checkout-payment-option">
-              <div class="checkout-payment-option__header">
-                <label class="checkout-payment-option__label">
-                  <input type="radio" name="payment_method" value="credit_card" checked>
-                  Credit card
-                </label>
-                <div class="checkout-card-logos">
-                  <span class="visa">VISA</span>
-                  <span class="mc">MC</span>
-                  <span class="amex">AMEX</span>
-                  <span>DIS</span>
-                  <span>JCB</span>
-                </div>
-              </div>
-              <div class="checkout-payment-fields">
-                <div class="checkout-field">
-                  <input type="text" placeholder="Card number" name="attributes[card_number]" autocomplete="cc-number">
-                </div>
-                <div class="checkout-field">
-                  <input type="text" placeholder="Name on card" name="attributes[card_name]" autocomplete="cc-name">
-                </div>
-                <div class="checkout-row">
-                  <div class="checkout-field">
-                    <input type="text" placeholder="Expiration date (MM/YY)" name="attributes[card_expiry]" autocomplete="cc-exp">
-                  </div>
-                  <div class="checkout-field">
-                    <input type="text" placeholder="Security code" name="attributes[card_cvv]" autocomplete="cc-csc">
-                  </div>
-                </div>
-                <div class="checkout-checkbox-row">
-                  <input type="checkbox" id="co-billing-same" name="attributes[billing_same]" checked>
-                  <label for="co-billing-same">Use shipping address as billing address</label>
-                </div>
+          <!-- Credit card -->
+          <div class="checkout-payment-option">
+            <div class="checkout-payment-option__header">
+              <label class="checkout-payment-option__label">
+                <input type="radio" name="payment_method" value="credit_card" checked>
+                Credit card
+              </label>
+              <div class="checkout-card-logos">
+                <span class="cc-visa">VISA</span>
+                <span class="cc-mc">
+                  <span class="cc-mc__left"></span>
+                  <span class="cc-mc__right"></span>
+                </span>
+                <span class="cc-amex">AMEX</span>
+                <span class="cc-discover">DIS<span>COVER</span></span>
+                <span class="cc-union">UP</span>
               </div>
             </div>
-
-            <!-- PayPal option -->
-            <div class="checkout-payment-option">
-              <div class="checkout-payment-option__header">
-                <label class="checkout-payment-option__label">
-                  <input type="radio" name="payment_method" value="paypal">
-                  <img src="{{ 'paypal' | placeholder_svg_tag }}" alt="PayPal" style="height:2rem;display:none;">
-                  PayPal
-                </label>
+            <div class="checkout-payment-fields">
+              <div class="checkout-field">
+                <input type="text" placeholder="Card number" name="attributes[card_number]" autocomplete="cc-number">
+              </div>
+              <div class="checkout-field">
+                <input type="text" placeholder="Name on card" name="attributes[card_name]" autocomplete="cc-name">
+              </div>
+              <div class="checkout-row">
+                <div class="checkout-field">
+                  <input type="text" placeholder="Expiration date (MM/YY)" name="attributes[card_expiry]" autocomplete="cc-exp">
+                </div>
+                <div class="checkout-field">
+                  <input type="text" placeholder="Security code" name="attributes[card_cvv]" autocomplete="cc-csc">
+                </div>
+              </div>
+              <div class="checkout-checkbox-row">
+                <input type="checkbox" id="co-billing-same" name="attributes[billing_same]" checked>
+                <label for="co-billing-same">Use shipping address as billing address</label>
               </div>
             </div>
           </div>
 
-          <button type="submit" class="checkout-submit" formaction="{{ routes.cart_url }}/checkout">
+          <!-- Cash on Delivery -->
+          <div class="checkout-payment-option checkout-payment-option--cod">
+            <div class="checkout-payment-option__header">
+              <label class="checkout-payment-option__label">
+                <input type="radio" name="payment_method" value="cash_on_delivery">
+                <span class="cod-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                </span>
+                Cash on Delivery
+              </label>
+            </div>
+          </div>
+
+          <!-- Place order button inside payment card -->
+          <a
+            href="/pages/checkout"
+            class="checkout-submit"
+            {% if cart == empty %}
+              aria-disabled="true"
+              style="pointer-events:none;opacity:0.5;"
+            {% endif %}
+          >
             Place order
-          </button>
-        </form>
-      </div>
+          </a>
+        </div>
 
-      <!-- ===== RIGHT: Your Order ===== -->
-      <div class="checkout-right">
-        <div class="checkout-order">
-          <h2 class="checkout-order-title">Your order</h2>
+      </form>
+    </div>
 
-          <div class="checkout-order-items">
-            {%- for item in cart.items -%}
-              <div class="checkout-order-item">
-                <div class="checkout-order-item__image">
-                  {%- if item.image -%}
-                    <img
-                      src="{{ item.image | image_url: width: 128 }}"
-                      alt="{{ item.image.alt | escape }}"
-                      loading="lazy"
-                      width="64"
-                      height="64"
-                    >
-                  {%- endif -%}
-                </div>
-                <div class="checkout-order-item__info">
-                  <p class="checkout-order-item__name">{{ item.product.title | escape }}</p>
-                  <p class="checkout-order-item__qty">Amount : {{ item.quantity }}</p>
-                </div>
-                <span class="checkout-order-item__price">{{ item.final_line_price | money }}</span>
-              </div>
-            {%- endfor -%}
-          </div>
+    <!-- ===== RIGHT: Your Order ===== -->
+    <div class="checkout-right">
+      <div class="checkout-section-card checkout-order">
+        <h2 class="checkout-order-title">Your order</h2>
 
-          <div class="checkout-totals">
-            <div class="checkout-totals__row">
-              <span class="checkout-totals__label">Subtotal</span>
-              <span class="checkout-totals__amount">{{ cart.items_subtotal_price | money }}</span>
-            </div>
-            <div class="checkout-totals__row">
-              <span class="checkout-totals__label">Shipping</span>
-              <span class="checkout-totals__amount">
-                {%- if cart.total_price > cart.items_subtotal_price -%}
-                  {{ cart.total_price | minus: cart.items_subtotal_price | money }}
-                {%- else -%}
-                  Calculated at checkout
+        <div class="checkout-order-items">
+          {%- for item in cart.items -%}
+            <div class="checkout-order-item">
+              <div class="checkout-order-item__image">
+                {%- if item.image -%}
+                  <img
+                    src="{{ item.image | image_url: width: 128 }}"
+                    alt="{{ item.image.alt | escape }}"
+                    loading="lazy"
+                    width="64"
+                    height="64"
+                  >
                 {%- endif -%}
-              </span>
+              </div>
+              <div class="checkout-order-item__info">
+                <p class="checkout-order-item__name">{{ item.product.title | escape }}</p>
+                <p class="checkout-order-item__qty">Amount : {{ item.quantity }}</p>
+              </div>
+              <span class="checkout-order-item__price">{{ item.final_line_price | money }}</span>
             </div>
-            <div class="checkout-totals__row">
-              <span class="checkout-totals__label">Total</span>
-              <span class="checkout-totals__amount">{{ cart.total_price | money }}</span>
-            </div>
+          {%- endfor -%}
+        </div>
+
+        <div class="checkout-totals">
+          <div class="checkout-totals__row">
+            <span class="checkout-totals__label">Subtotal</span>
+            <span class="checkout-totals__amount">{{ cart.items_subtotal_price | money }}</span>
+          </div>
+          <div class="checkout-totals__row">
+            <span class="checkout-totals__label">Shipping</span>
+            <span class="checkout-totals__amount">
+              {%- if cart.total_price > cart.items_subtotal_price -%}
+                {{ cart.total_price | minus: cart.items_subtotal_price | money }}
+              {%- else -%}
+                Calculated at checkout
+              {%- endif -%}
+            </span>
+          </div>
+          <div class="checkout-totals__row checkout-totals__row--grand">
+            <span class="checkout-totals__label">Total</span>
+            <span class="checkout-totals__amount">{{ cart.total_price | money }}</span>
           </div>
         </div>
       </div>
-
     </div>
+
   </div>
 </div>
 
