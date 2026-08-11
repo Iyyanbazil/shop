@@ -86,7 +86,7 @@
 
   .sidebar-categories__link:hover,
   .sidebar-categories__item.active .sidebar-categories__link {
-    color: #1096b5;
+    color: #1a9cbf;
   }
 
   .sidebar-popular-product {
@@ -123,12 +123,12 @@
   }
 
   .sidebar-popular-product__title:hover {
-    color: #1096b5;
+    color: #1a9cbf;
   }
 
   .sidebar-popular-product__price {
     font-size: 1.4rem;
-    color: #1096b5;
+    color: #1a9cbf;
     font-weight: 600;
     margin: 0;
   }
@@ -149,12 +149,13 @@
     display: flex;
     align-items: center;
     margin: 14px 0 12px;
+    padding: 0 10px;
   }
 
   .price-range-ui__track {
     position: absolute;
-    left: 0;
-    right: 0;
+    left: 10px;
+    right: 10px;
     top: 50%;
     transform: translateY(-50%);
     height: 6px;
@@ -162,8 +163,8 @@
     background: linear-gradient(
       to right,
       #d8d8d8 var(--pf-min, 0%),
-      #1096b5 var(--pf-min, 0%),
-      #1096b5 var(--pf-max, 100%),
+      #1a9cbf var(--pf-min, 0%),
+      #1a9cbf var(--pf-max, 100%),
       #d8d8d8 var(--pf-max, 100%)
     );
   }
@@ -203,7 +204,7 @@
     appearance: none;
     width: 20px;
     height: 20px;
-    background: #1096b5;
+    background: #1a9cbf;
     border-radius: 50%;
     cursor: pointer;
     pointer-events: all;
@@ -214,7 +215,7 @@
   .price-range-ui__input::-moz-range-thumb {
     width: 20px;
     height: 20px;
-    background: #1096b5;
+    background: #1a9cbf;
     border-radius: 50%;
     cursor: pointer;
     pointer-events: all;
@@ -238,7 +239,7 @@
   }
 
   .price-range-ui__apply {
-    background: #1096b5;
+    background: #1a9cbf;
     color: #fff;
     border: none;
     border-radius: 8px;
@@ -251,7 +252,29 @@
   }
 
   .price-range-ui__apply:hover {
-    background: #0d7f9a;
+    background: #1485a3;
+  }
+
+  /* Padding for price slider inside mobile drawer */
+  .mobile-facets__submenu .price-range-ui {
+    padding: 0 1.6rem 1.6rem;
+  }
+
+  /* Hide duplicate inner Apply button inside mobile price submenu */
+  .mobile-facets__submenu .price-range-ui__footer {
+    display: none;
+  }
+
+  /* Mobile filter Apply buttons — teal primary color */
+  .mobile-facets__apply-btn {
+    background-color: #1a9cbf !important;
+    color: #fff !important;
+    border-color: #1a9cbf !important;
+    border-radius: 0.6rem;
+  }
+  .mobile-facets__apply-btn:hover {
+    background-color: #1485a3 !important;
+    border-color: #1485a3 !important;
   }
 
   /* Sidebar gap */
@@ -292,13 +315,13 @@
   }
 
   .pagination__item:hover:not(.pagination__item--current) {
-    border-color: #1096b5 !important;
-    color: #1096b5 !important;
+    border-color: #1a9cbf !important;
+    color: #1a9cbf !important;
   }
 
   .pagination__item--current {
-    background: #1096b5 !important;
-    border-color: #1096b5 !important;
+    background: #1a9cbf !important;
+    border-color: #1a9cbf !important;
     color: #fff !important;
     font-weight: 700 !important;
   }
@@ -310,8 +333,8 @@
   }
 
   .pagination__item-arrow:hover {
-    border-color: #1096b5 !important;
-    color: #1096b5 !important;
+    border-color: #1a9cbf !important;
+    color: #1a9cbf !important;
   }
 
   .pagination__item-arrow .icon-caret {
@@ -361,7 +384,7 @@
   }
 
   .collection-breadcrumb a:hover {
-    color: #1096b5;
+    color: #1a9cbf;
   }
 
   .collection-breadcrumb__separator {
@@ -369,7 +392,7 @@
   }
 
   .collection-breadcrumb__current {
-    color: #1096b5;
+    color: #1a9cbf;
     font-weight: 600;
   }
 
@@ -411,8 +434,8 @@
 
   .view-toggle__btn.active,
   .view-toggle__btn:hover {
-    background: #1096b5;
-    border-color: #1096b5;
+    background: #1a9cbf;
+    border-color: #1a9cbf;
     color: #fff;
     position: relative;
     z-index: 1;
@@ -588,7 +611,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    background: #1096b5;
+    background: #1a9cbf;
     color: #fff;
     border: none;
     border-radius: 8px;
@@ -633,8 +656,8 @@
   }
 
   .card__list-action-btn:hover {
-    border-color: #1096b5;
-    color: #1096b5;
+    border-color: #1a9cbf;
+    color: #1a9cbf;
   }
 {%- endstyle -%}
 

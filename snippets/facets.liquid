@@ -512,6 +512,52 @@
               id="FacetsWrapperMobile"
               class="mobile-facets__main has-submenu gradient"
             >
+              {%- if filter_type == 'vertical' -%}
+                <details class="mobile-facets__details js-filter">
+                  <summary class="mobile-facets__summary focus-inset">
+                    <div>
+                      <span>Product categories</span>
+                      <span class="mobile-facets__arrow">
+                        {{- 'icon-arrow.svg' | inline_asset_content -}}
+                      </span>
+                    </div>
+                  </summary>
+                  <div class="mobile-facets__submenu gradient">
+                    <button class="mobile-facets__close-button link link--text focus-inset" aria-expanded="true" type="button">
+                      {{- 'icon-arrow.svg' | inline_asset_content -}}
+                      <span>Product categories</span>
+                    </button>
+                    <ul class="mobile-facets__list list-unstyled" role="list">
+                      {%- if section.settings.categories_menu != blank -%}
+                        {%- assign cat_menu = linklists[section.settings.categories_menu] -%}
+                        {%- for link in cat_menu.links -%}
+                          <li class="mobile-facets__item list-menu__item">
+                            <a href="{{ link.url }}" class="mobile-facets__label{% if link.active %} active{% endif %}" style="text-decoration:none;color:rgb(var(--color-foreground));">
+                              {{ link.title }}
+                            </a>
+                          </li>
+                        {%- endfor -%}
+                      {%- else -%}
+                        {%- for col in collections -%}
+                          {%- unless col.handle == 'frontpage' or col.handle == 'all' -%}
+                            <li class="mobile-facets__item list-menu__item">
+                              <a href="{{ col.url }}" class="mobile-facets__label{% if col.handle == collection.handle %} active{% endif %}" style="text-decoration:none;color:rgb(var(--color-foreground));">
+                                {{ col.title }}
+                              </a>
+                            </li>
+                          {%- endunless -%}
+                        {%- endfor -%}
+                      {%- endif -%}
+                    </ul>
+                    <div class="mobile-facets__footer gradient">
+                      <button type="button" class="button mobile-facets__apply-btn" onclick="this.closest('.mobile-facets__wrapper').querySelector('summary').click()">
+                        {{ 'products.facets.apply' | t }}
+                      </button>
+                    </div>
+                  </div>
+                </details>
+              {%- endif -%}
+
               {%- if enable_filtering -%}
                 {%- for filter in results.filters -%}
                   {% liquid
@@ -658,7 +704,7 @@
                             </facet-remove>
                             <button
                               type="button"
-                              class="button button--primary"
+                              class="button mobile-facets__apply-btn"
                               onclick="this.closest('.mobile-facets__wrapper').querySelector('summary').click()"
                             >
                               {{ 'products.facets.apply' | t }}
@@ -699,7 +745,7 @@
                           </p>
 
                           <price-range class="facets__price">
-                            {% render 'price-facet', filter: filter, id_prefix: 'Mobile-Filter-' %}
+                            {% render 'price-facet', filter: filter, id_prefix: 'Mobile-Filter-', filter_type: 'vertical' %}
                           </price-range>
                           <div class="mobile-facets__footer">
                             <facet-remove class="mobile-facets__clear-wrapper">
@@ -709,8 +755,8 @@
                             </facet-remove>
                             <button
                               type="button"
-                              class="button button--primary"
-                              onclick="this.closest('.mobile-facets__wrapper').querySelector('summary').click()"
+                              class="button mobile-facets__apply-btn"
+                              onclick="var sub=this.closest('.mobile-facets__submenu');var pa=sub&&sub.querySelector('.price-range-ui__apply');if(pa)pa.click();this.closest('.mobile-facets__wrapper').querySelector('summary').click()"
                             >
                               {{ 'products.facets.apply' | t }}
                             </button>
