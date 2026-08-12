@@ -297,6 +297,19 @@
     padding-right: 5rem !important;
   }
 
+  /* Increase product grid gap */
+  #product-grid {
+    --grid-desktop-horizontal-spacing: 20px;
+    --grid-desktop-vertical-spacing: 28px;
+  }
+
+  @media screen and (max-width: 749px) {
+    #product-grid {
+      --grid-mobile-horizontal-spacing: 12px;
+      --grid-mobile-vertical-spacing: 20px;
+    }
+  }
+
   /* Product grid responsive columns */
   @media screen and (min-width: 500px) and (max-width: 750px) {
     #product-grid .grid__item {
