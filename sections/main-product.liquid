@@ -38,17 +38,34 @@
       }
     }
 
+    @media screen and (max-width: 749px) {
+      #ProductInfo-{{ section.id }} {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        margin-top: 5rem;
+      }
+    }
+
     /* Move safe checkout above buy buttons */
     #ProductInfo-{{ section.id }} {
       display: flex;
       flex-direction: column;
+      gap: 1.2rem;
     }
 
-    #ProductInfo-{{ section.id }} > * + * { margin-top: 1.5rem; }
+    #ProductInfo-{{ section.id }} > * {
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+    }
 
     #ProductInfo-{{ section.id }} .product__safe-checkout { order: 5; }
 
     #ProductInfo-{{ section.id }} > div:has(product-form) { order: 6; }
+
+    /* Tighten gap between price and Judge.me stars */
+    #ProductInfo-{{ section.id }} > div:has([class*="jdgm"]) {
+      margin-top: -0.7rem !important;
+    }
 
     /* Price size */
     #MainProduct-{{ section.id }} .price--large { font-size: 2.4rem; }

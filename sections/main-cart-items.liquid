@@ -17,6 +17,14 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  @media screen and (max-width: 749px) {
+    quantity-input.cart-quantity,
+    quantity-input.cart-quantity.quantity {
+      width: 10rem !important;
+      min-width: 0 !important;
+    }
+  }
 {%- endstyle -%}
 
 {%- unless settings.cart_type == 'drawer' -%}

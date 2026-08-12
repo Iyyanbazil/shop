@@ -1,7 +1,13 @@
 /* ===== Checkout Page ===== */
 
 .checkout-page {
-  padding: 3rem 0 5rem;
+  padding: 3rem 1.5rem 5rem;
+}
+
+@media screen and (min-width: 750px) {
+  .checkout-page {
+    padding: 3rem 3rem 5rem;
+  }
 }
 
 /* Breadcrumb */
@@ -24,8 +30,8 @@
 /* Page title */
 .checkout-title {
   font-size: 2.8rem;
-  font-weight: 900;
-  margin: 0 0 2.5rem 0;
+  font-weight: 700;
+  margin: 5rem 0 2.5rem 0;
   -webkit-text-stroke: 0.4px currentColor;
 }
 
@@ -328,6 +334,22 @@
 .checkout-right {
   position: sticky;
   top: 2rem;
+}
+
+@media screen and (max-width: 899px) {
+  .checkout-layout {
+    display: flex;
+    flex-direction: column;
+  }
+  .checkout-right {
+    order: -1;
+    position: static;
+    width: 100%;
+  }
+  .checkout-left {
+    order: 0;
+    width: 100%;
+  }
 }
 
 .checkout-order-title {

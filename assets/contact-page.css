@@ -1,7 +1,13 @@
 /* ===== Contact Page ===== */
 
 .contact-page {
-  padding: 3rem 0 5rem;
+  padding: 3rem 1.5rem 5rem;
+}
+
+@media screen and (min-width: 750px) {
+  .contact-page {
+    padding: 3rem 3rem 5rem;
+  }
 }
 
 /* Breadcrumb */
@@ -93,6 +99,7 @@
   grid-template-columns: 1fr;
   gap: 2.5rem;
   align-items: stretch;
+ margin-top: 6rem;
 }
 
 @media screen and (min-width: 750px) {
