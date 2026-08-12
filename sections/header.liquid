@@ -117,18 +117,38 @@
   }
 
   @media screen and (max-width: 989px) {
+    .header__icons {
+      min-width: 0;
+      overflow: visible;
+    }
     .header__search-inline-wrapper {
       display: flex;
+      flex-shrink: 1;
+      min-width: 0;
       margin-left: 0.4rem;
+    }
+    .header__search-inline {
+      min-width: 0;
     }
     .header__search-inline input[type="search"] {
       width: 110px;
+      min-width: 0;
+    }
+    .header__icon--cart {
+      margin-right: 0;
+      flex-shrink: 0;
     }
   }
 
   @media screen and (max-width: 600px) {
     .header__search-inline input[type="search"] {
       width: 80px;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .header__search-inline input[type="search"] {
+      width: 55px;
       font-size: 1.1rem;
     }
   }
