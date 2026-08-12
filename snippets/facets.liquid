@@ -532,7 +532,7 @@
                         {%- assign cat_menu = linklists[section.settings.categories_menu] -%}
                         {%- for link in cat_menu.links -%}
                           <li class="mobile-facets__item list-menu__item">
-                            <a href="{{ link.url }}" class="mobile-facets__label{% if link.active %} active{% endif %}" style="text-decoration:none;color:rgb(var(--color-foreground));">
+                            <a href="{{ link.url }}" class="mobile-facets__label{% if link.active %} active{% endif %}" style="text-decoration:none;color:#121212;">
                               {{ link.title }}
                             </a>
                           </li>
@@ -541,7 +541,7 @@
                         {%- for col in collections -%}
                           {%- unless col.handle == 'frontpage' or col.handle == 'all' -%}
                             <li class="mobile-facets__item list-menu__item">
-                              <a href="{{ col.url }}" class="mobile-facets__label{% if col.handle == collection.handle %} active{% endif %}" style="text-decoration:none;color:rgb(var(--color-foreground));">
+                              <a href="{{ col.url }}" class="mobile-facets__label{% if col.handle == collection.handle %} active{% endif %}" style="text-decoration:none;color:#121212;">
                                 {{ col.title }}
                               </a>
                             </li>

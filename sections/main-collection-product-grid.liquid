@@ -35,6 +35,12 @@
     }
   }
 
+  @media screen and (max-width: 749px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 | plus: 30 }}px;
+    }
+  }
+
   .sidebar-widget {
     padding: 16px;
     border: 1px solid #e0e0e0;
@@ -265,6 +271,15 @@
     display: none;
   }
 
+  /* Mobile filter — increase font size */
+  .mobile-facets__label,
+  .mobile-facets__summary,
+  .mobile-facets__heading,
+  .mobile-facets__item label,
+  .mobile-facets__item a {
+    font-size: 1.8rem !important;
+  }
+
   /* Mobile filter Apply buttons — teal primary color */
   .mobile-facets__apply-btn {
     background-color: #1a9cbf !important;
@@ -280,6 +295,26 @@
   /* Sidebar gap */
   .facets-vertical .facets-wrapper {
     padding-right: 5rem !important;
+  }
+
+  /* Product grid responsive columns */
+  @media screen and (min-width: 500px) and (max-width: 750px) {
+    #product-grid .grid__item {
+      width: calc(33.33% - var(--grid-mobile-horizontal-spacing) * 2 / 3) !important;
+    }
+  }
+
+  @media screen and (min-width: 350px) and (max-width: 499px) {
+    #product-grid .grid__item {
+      width: calc(50% - var(--grid-mobile-horizontal-spacing) / 2) !important;
+    }
+  }
+
+  @media screen and (max-width: 349px) {
+    #product-grid .grid__item {
+      width: 100% !important;
+      max-width: 100% !important;
+    }
   }
 
   /* Pagination */
@@ -408,6 +443,12 @@
     margin: 0 0 16px;
     color: #111;
     line-height: 1.2;
+  }
+
+  @media screen and (max-width: 749px) {
+    .collection-page-title {
+      margin-top: 20px;
+    }
   }
 
   /* Grid / List view toggle */
