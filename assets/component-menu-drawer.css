@@ -121,6 +121,16 @@ details[open].menu-opening > .menu-drawer__submenu {
   background-color: rgba(var(--color-foreground), 0.08);
 }
 
+.menu-drawer__menu-item--active,
+a.menu-drawer__menu-item[aria-current="page"] {
+  color: #1a9cbf !important;
+  font-weight: 600 !important;
+}
+
+a.menu-drawer__menu-item[aria-current="page"]:hover {
+  color: #1485a3 !important;
+}
+
 .js .menu-drawer__menu-item .icon-caret {
   display: none;
 }

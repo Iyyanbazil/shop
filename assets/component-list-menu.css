@@ -18,11 +18,21 @@ a.header__menu-item[aria-current="page"] {
   text-decoration: underline;
   text-underline-offset: 0.3rem;
   color: #1a9cbf !important;
+  font-weight: 600 !important;
+}
+
+a.header__menu-item[aria-current="page"] .header__active-menu-item {
+  color: #1a9cbf !important;
+  font-weight: 600 !important;
 }
 
 .list-menu__item--active:hover,
 a.header__menu-item[aria-current="page"]:hover {
   text-decoration-thickness: 0.2rem;
+  color: #1485a3 !important;
+}
+
+a.header__menu-item[aria-current="page"]:hover .header__active-menu-item {
   color: #1485a3 !important;
 }
 

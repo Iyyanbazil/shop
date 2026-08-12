@@ -1,22 +1,190 @@
 <style>
-  /* ── Judge.me carousel card background image ── */
+  /* ── Judge.me page-load spinner: small and centered ── */
+  .jdgm-spinner,
+  .jdgm-loading-overlay,
+  .jdgm-rev-loading,
+  .jdgm-widget-preview-loading,
+  [class*="jdgm-spinner"] {
+    width: 40px !important;
+    height: 40px !important;
+    max-width: 40px !important;
+    max-height: 40px !important;
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    background: transparent !important;
+    border-radius: 50% !important;
+  }
+
+  /* Prevent full-screen loading overlays from covering entire page */
+  [class*="jdgm-loading"] {
+    max-width: 60px !important;
+    max-height: 60px !important;
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    background: transparent !important;
+  }
+
+  /* ── Judge.me star fix: override icon font with Unicode star ── */
+  .jdgm-star {
+    font-family: Times, serif !important;
+    font-style: normal !important;
+    font-size: 1.6rem;
+    line-height: 1;
+  }
+
+  .jdgm-star::before {
+    content: '★' !important;
+  }
+
+  .jdgm-star.jdgm--on {
+    color: #f5c518 !important;
+  }
+
+  .jdgm-star.jdgm--half {
+    color: #f5c518 !important;
+    opacity: 0.6;
+  }
+
+  .jdgm-star.jdgm--off {
+    color: #d0d0d0 !important;
+  }
+
+  /* ── Judge.me cards wrapper width ── */
+  .jdgm-cards-carousel .jdgm-cards-wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  @media screen and (max-width: 600px) {
+    .jdgm-cards-carousel,
+    .jdgm-cards-carousel .jdgm-cards-wrapper {
+      padding-left: 1.5rem !important;
+      padding-right: 1.5rem !important;
+    }
+
+    /* Force arrows visible on mobile */
+    .jdgm-carousel__btn,
+    .jdgm-carousel__btn--prev,
+    .jdgm-carousel__btn--next,
+    [class*="jdgm-carousel__btn"],
+    [class*="jdgm-carousel__arrow"],
+    .jdgm-cards-carousel [class*="arrow"],
+    .jdgm-cards-carousel [class*="prev"],
+    .jdgm-cards-carousel [class*="next"] {
+      display: flex !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+  }
+
+  /* ── Judge.me carousel layout — override inline max-width ── */
+  .jdgm-carousel,
+  .jdgm-carousel-wrapper,
+  .jdgm-carousel__inner,
+  .jdgm-carousel__slides,
+  .jdgm-rev-carousel,
+  .jdgm-rev-carousel__inner,
+  .jdgm-cards-carousel {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  /* Arrow buttons — circular, transparent bg, grey border, edge-positioned */
+  .jdgm-carousel__btn,
+  .jdgm-carousel__btn--prev,
+  .jdgm-carousel__btn--next,
+  [class*="jdgm-carousel__btn"],
+  [class*="jdgm-carousel__arrow"],
+  .jdgm-cards-carousel [class*="arrow"],
+  .jdgm-cards-carousel [class*="prev"],
+  .jdgm-cards-carousel [class*="next"] {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 36px !important;
+    height: 36px !important;
+    max-width: none !important;
+    border-radius: 50% !important;
+    background: transparent !important;
+    border: 1.5px solid #aaa !important;
+    box-shadow: none !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    color: #888 !important;
+    transition: border-color 0.2s, color 0.2s !important;
+    flex-shrink: 0 !important;
+    position: relative !important;
+    z-index: 2 !important;
+    /* Push arrows so they mostly sit on card edge */
+    margin-left: -36px !important;
+    margin-right: -36px !important;
+  }
+
+  .jdgm-carousel__btn:hover,
+  .jdgm-carousel__btn--prev:hover,
+  .jdgm-carousel__btn--next:hover,
+  [class*="jdgm-carousel__btn"]:hover,
+  [class*="jdgm-carousel__arrow"]:hover,
+  .jdgm-cards-carousel [class*="arrow"]:hover,
+  .jdgm-cards-carousel [class*="prev"]:hover,
+  .jdgm-cards-carousel [class*="next"]:hover {
+    border-color: #555 !important;
+    color: #555 !important;
+  }
+
+  /* Outer carousel can overflow for arrows, but wrapper hides slides */
+  .jdgm-cards-carousel {
+    overflow: visible !important;
+    position: relative !important;
+    padding-left: 5rem !important;
+    padding-right: 5rem !important;
+  }
+  .jdgm-cards-carousel .jdgm-cards-wrapper {
+    overflow: hidden !important;
+  }
+
+  /* Large: 3 cards, Medium: 2 cards, Mobile: 1 card */
   .jdgm-carousel-item,
   .jdgm-carousel__item {
-    {%- if section.settings.card_bg_image != blank -%}
-    background-image: url('{{ section.settings.card_bg_image | image_url: width: 800 }}') !important;
+    background-color: #FAEFEF !important;
+    background-image: url('{{ 'cardBg.png' | asset_url }}') !important;
     background-size: cover !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
-    background-color: transparent !important;
-    {%- else -%}
-    background-color: #FFF0F2 !important;
-    {%- endif -%}
+    padding: 2rem !important;
+    min-height: 200px !important;
+    box-sizing: border-box !important;
+    flex: 1 0 calc(33.33% - 1rem) !important;
+    max-width: calc(33.33% - 1rem) !important;
+  }
+
+  @media screen and (max-width: 989px) {
+    .jdgm-carousel-item,
+    .jdgm-carousel__item {
+      flex: 1 0 calc(50% - 1rem) !important;
+      max-width: calc(50% - 1rem) !important;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .jdgm-carousel-item,
+    .jdgm-carousel__item {
+      flex: 1 0 100% !important;
+      max-width: 100% !important;
+    }
   }
 
 </style>
 
 {%- if section.settings.heading != blank or section.settings.subheading != blank -%}
-  <div class="apps-section-header page-width" style="text-align: center; margin-bottom: 2rem;">
+  <div class="apps-section-header page-width" style="text-align: center; margin-bottom: 2rem; margin-top: 6rem;">
     {%- if section.settings.heading != blank -%}
       <h2 class="apps-section-heading" style="font-size: {{ section.settings.heading_size }}px; font-weight: 700; margin: 0 0 0.5rem;">{{ section.settings.heading }}</h2>
     {%- endif -%}
@@ -26,11 +194,61 @@
   </div>
 {%- endif -%}
 
-<div class="{% if section.settings.include_margins %}page-width{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+<div class="page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}" style="padding-left: 0; padding-right: 0;">
   {%- for block in section.blocks -%}
     {% render block %}
   {%- endfor -%}
 </div>
+
+<script>
+(function () {
+  var INTERVAL = 4000;
+  var timer = null;
+  var paused = false;
+
+  function findNextBtn(carousel) {
+    return (
+      carousel.querySelector('[class*="next"]') ||
+      carousel.querySelector('.jdgm-carousel__btn--next') ||
+      carousel.querySelectorAll('[class*="jdgm-carousel__btn"]')[1] ||
+      null
+    );
+  }
+
+  function startAutoPlay(carousel) {
+    if (timer) return;
+    timer = setInterval(function () {
+      if (!paused) {
+        var btn = findNextBtn(carousel);
+        if (btn) btn.click();
+      }
+    }, INTERVAL);
+  }
+
+  function init() {
+    var carousel = document.querySelector('.jdgm-cards-carousel');
+    if (!carousel) return;
+
+    carousel.addEventListener('mouseenter', function () { paused = true; });
+    carousel.addEventListener('mouseleave', function () { paused = false; });
+    carousel.addEventListener('touchstart', function () { paused = true; }, { passive: true });
+    carousel.addEventListener('touchend', function () {
+      setTimeout(function () { paused = false; }, 2000);
+    });
+
+    startAutoPlay(carousel);
+  }
+
+  /* Judge.me renders asynchronously — wait for carousel to appear */
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () {
+      setTimeout(init, 1500);
+    });
+  } else {
+    setTimeout(init, 1500);
+  }
+})();
+</script>
 
 {% schema %}
 {
