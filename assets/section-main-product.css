@@ -1659,6 +1659,7 @@ a.product__text {
   border-radius: 0.6rem;
   padding: 1.4rem 1.6rem;
   margin: 1.5rem 0;
+  margin-bottom: 0rem;
 }
 
 .product__safe-checkout-header {

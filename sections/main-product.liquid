@@ -37,6 +37,60 @@
         padding-bottom: {{ section.settings.padding_bottom }}px;
       }
     }
+
+    /* Move safe checkout above buy buttons */
+    #ProductInfo-{{ section.id }} {
+      display: flex;
+      flex-direction: column;
+    }
+
+    #ProductInfo-{{ section.id }} > * + * { margin-top: 1.5rem; }
+
+    #ProductInfo-{{ section.id }} .product__safe-checkout { order: 5; }
+
+    #ProductInfo-{{ section.id }} > div:has(product-form) { order: 6; }
+
+    /* Price size */
+    #MainProduct-{{ section.id }} .price--large { font-size: 2.4rem; }
+    @media screen and (min-width: 750px) {
+      #MainProduct-{{ section.id }} .price--large { font-size: 2.8rem; }
+    }
+
+    /* Quantity + cart icon on same row */
+    #MainProduct-{{ section.id }} .quantity-with-cart {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    #MainProduct-{{ section.id }} .product-qty-cart-btn {
+      width: 4.5rem;
+      height: 4.5rem;
+      flex-shrink: 0;
+      border-radius: 50% !important;
+      border: 0.1rem solid rgba(var(--color-foreground), 0.2) !important;
+      box-shadow: none !important;
+      outline: none !important;
+    }
+
+    #MainProduct-{{ section.id }} .product-qty-cart-btn .svg-wrapper,
+    #MainProduct-{{ section.id }} .product-qty-cart-btn svg {
+      width: 2rem;
+      height: 2rem;
+    }
+
+    /* Hide original cart icon inside buy-buttons */
+    #MainProduct-{{ section.id }} .product-form__buttons .product__action-icon-btn[aria-label="{{ 'products.product.add_to_cart' | t }}"] {
+      display: none !important;
+    }
+
+    /* Rounded corners */
+    #MainProduct-{{ section.id }} .quantity,
+    #MainProduct-{{ section.id }} .quantity::before,
+    #MainProduct-{{ section.id }} .quantity::after { border-radius: 50px !important; }
+    #MainProduct-{{ section.id }} .product-form__submit { border-radius: 50px !important; }
+    #MainProduct-{{ section.id }} .shopify-payment-button__button--unbranded { border-radius: 50px !important; }
+    #MainProduct-{{ section.id }} .product__action-icon-btn { border-radius: 50% !important; }
   {%- endstyle -%}
 
   <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
@@ -72,9 +126,26 @@
     >
   {%- endif -%}
 
+  <style>
+    .product-breadcrumb { font-size: 1.4rem; color: #888; padding: 0.2rem 0 6rem; }
+    .product-breadcrumb a { color: #1096b5; text-decoration: none; }
+    .product-breadcrumb a:hover { text-decoration: underline; }
+    .product-breadcrumb__separator { margin: 0 0.5rem; color: #bbb; }
+    .product-breadcrumb__current { color: #444; font-weight: 500; }
+  </style>
+
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
   <product-component view-event-payload="{{ product | standard_event_data: 'view', context: 'page' | escape }}">
     <div class="page-width">
+      <nav class="product-breadcrumb" aria-label="Breadcrumb">
+        <a href="{{ routes.root_url }}">Home</a>
+        <span class="product-breadcrumb__separator">/</span>
+        {%- if product.collections.size > 0 -%}
+          <a href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a>
+          <span class="product-breadcrumb__separator">/</span>
+        {%- endif -%}
+        <span class="product-breadcrumb__current">{{ product.title }}</span>
+      </nav>
       <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
         <div class="grid__item product__media-wrapper">
           {% render 'product-media-gallery', variant_images: variant_images %}
@@ -263,6 +334,7 @@
                       </span>
                     </label>
                     <div class="price-per-item__container">
+                      <div class="quantity-with-cart">
                       <quantity-input class="quantity" data-url="{{ product.url }}" data-section="{{ section.id }}">
                         <button class="quantity__button" name="minus" type="button">
                           <span class="visually-hidden">
@@ -297,6 +369,17 @@
                           </span>
                         </button>
                       </quantity-input>
+                      <button
+                        type="submit"
+                        name="add"
+                        form="{{ product_form_id }}"
+                        class="product__action-icon-btn product-qty-cart-btn"
+                        aria-label="{{ 'products.product.add_to_cart' | t }}"
+                        {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}
+                      >
+                        <span class="svg-wrapper">{{- 'icon-cart.svg' | inline_asset_content -}}</span>
+                      </button>
+                      </div>
                       {%- liquid
                         assign volume_pricing_array = product.selected_or_first_available_variant.quantity_price_breaks | sort: 'quantity' | reverse
                         assign current_qty_for_volume_pricing = cart_qty | plus: product.selected_or_first_available_variant.quantity_rule.min
@@ -710,7 +793,7 @@
                     </div>
                   </div>
 
-                {%- when 'short_description' -%}
+                {% comment %} {%- when 'short_description' -%}
                   <div class="product__short-desc" {{ block.shopify_attributes }}>
                     <h3 class="product__short-desc-title">Short description</h3>
                     <table class="product__short-desc-table">
@@ -737,7 +820,7 @@
                         {%- endif -%}
                       </tbody>
                     </table>
-                  </div>
+                  </div> {% endcomment %}
 
                 {%- when 'safe_checkout' -%}
                   <div class="product__safe-checkout" {{ block.shopify_attributes }}>
