@@ -22,6 +22,38 @@
       body, h1, h2, h3, h4, h5, h6, p, a, button, input, select, textarea, span, li, td, th {
         font-family: 'Baloo Bhaina 2', sans-serif !important;
       }
+
+      /* ── App loader fix ── */
+      .jdgm-spinner,
+      .jdgm-loading,
+      .jdgm-rev-loading,
+      [class*="jdgm-spinner"],
+      [class*="jdgm-loading"] {
+        width: 36px !important;
+        height: 36px !important;
+        max-width: 36px !important;
+        max-height: 36px !important;
+        position: fixed !important;
+        inset: 0 !important;
+        margin: auto !important;
+        background: transparent !important;
+        z-index: 9999 !important;
+      }
+
+      /* Predictive search spinner — keep it contained */
+      .predictive-search__loading-state {
+        width: 2rem !important;
+        height: 2rem !important;
+        position: static !important;
+        transform: none !important;
+      }
+
+      /* Ensure the loading-spinner SVG never grows beyond its container */
+      .loading__spinner svg,
+      .predictive-search__loading-state svg {
+        width: 100% !important;
+        height: 100% !important;
+      }
     </style>
 
     <title>

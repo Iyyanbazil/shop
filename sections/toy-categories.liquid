@@ -124,7 +124,7 @@
   }
 </style>
 
-<div class="toy-categories-section">
+<div class="toy-categories-section{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
   <div class="page-width">
     {%- if section.settings.title != blank -%}
       <h2 class="toy-categories__heading">{{ section.settings.title }}</h2>
@@ -156,7 +156,8 @@
         {%- endif -%}
         <a
           href="{{ item_url }}"
-          class="toy-category-item"
+          class="toy-category-item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+          style="--animation-order: {{ forloop.index }};"
           {{ block.shopify_attributes }}
         >
           <div class="toy-category-item__blob">

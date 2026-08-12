@@ -3,6 +3,15 @@
     padding: {{ section.settings.section_margin }}px 0;
   }
 
+  @media screen and (max-width: 780px) {
+    #toy-promo-banner-{{ section.id }} {
+      grid-template-columns: 1fr;
+    }
+    #toy-promo-banner-{{ section.id }} .tpb-left {
+      display: none !important;
+    }
+  }
+
   #toy-promo-banner-{{ section.id }} {
     display: grid;
     grid-template-columns: 1fr 1fr;

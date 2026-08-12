@@ -28,10 +28,12 @@
     opacity: {{ section.settings.image_overlay_opacity | divided_by: 100.0 }};
   }
 
-  /* Push content to the right side, vertically centered */
+  /* Push content to the right side, aligned with navbar edge */
   #Banner-{{ section.id }} .banner__content {
     justify-content: flex-end;
     align-items: center;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
   }
 
   /* Transparent box, left-aligned text, flex column for ordering */
@@ -54,10 +56,24 @@
   /* Heading always first */
   #Banner-{{ section.id }} .banner__heading {
     order: 1;
-    color: #0d7a70;
+    color: #1096b5;
     font-weight: 800;
-    font-size: 4.2rem;
+    font-size: 5rem;
     margin-top: 0;
+    -webkit-text-stroke: 3px #ffffff;
+    paint-order: stroke fill;
+  }
+
+  @media screen and (max-width: 1400px) {
+    #Banner-{{ section.id }} .banner__heading {
+      font-size: 3.8rem;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    #Banner-{{ section.id }} .banner__heading {
+      font-size: 2.8rem;
+    }
   }
 
   /* Subtitle second */
@@ -156,6 +172,33 @@
       max-width: fit-content !important;
       font-size: 1.2rem !important;
       border-radius: 50px !important;
+    }
+  }
+
+  @media screen and (max-width: 447px) {
+    #Banner-{{ section.id }} .banner__content {
+      align-items: center !important;
+      justify-content: flex-end !important;
+      padding-bottom: 8% !important;
+    }
+  }
+
+  @media screen and (max-width: 340px) {
+    #Banner-{{ section.id }} .banner__heading {
+      font-size: 1.8rem !important;
+      line-height: 1.2 !important;
+    }
+    #Banner-{{ section.id }} .banner__text {
+      font-size: 0.9rem !important;
+      margin-top: 0.3rem !important;
+    }
+    #Banner-{{ section.id }} .banner__buttons .button {
+      padding: 0.4rem 0.8rem !important;
+      font-size: 1rem !important;
+    }
+    #Banner-{{ section.id }} .banner__box {
+      max-width: 50% !important;
+      padding: 0.5rem !important;
     }
   }
 {%- endstyle -%}

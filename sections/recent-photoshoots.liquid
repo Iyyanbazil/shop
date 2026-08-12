@@ -64,7 +64,7 @@
   }
 {%- endstyle -%}
 
-<div class="recent-photoshoots">
+<div class="recent-photoshoots{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
   {%- if section.settings.heading != blank or section.settings.subheading != blank -%}
     <div class="recent-photoshoots__header">
       {%- if section.settings.heading != blank -%}

@@ -89,7 +89,7 @@
   }
 </style>
 
-<div class="top-picks-section">
+<div class="top-picks-section{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
   <div class="page-width">
     {%- if section.settings.title != blank -%}
       <h2 class="top-picks__heading">{{ section.settings.title }}</h2>
@@ -141,28 +141,34 @@
         {%- if section.settings.featured_collection != blank -%}
           {%- assign skip_styles = false -%}
           {%- for product in section.settings.featured_collection.products limit: products_limit -%}
-            {% render 'card-product',
-              card_product: product,
-              media_aspect_ratio: section.settings.image_ratio,
-              show_secondary_image: section.settings.show_secondary_image,
-              show_vendor: false,
-              show_rating: section.settings.show_rating,
-              lazy_load: true,
-              skip_styles: skip_styles,
-              section_id: section.id,
-              quick_add: section.settings.quick_add
-            %}
+            <div {% if settings.animations_reveal_on_scroll %}class="scroll-trigger animate--slide-in" style="--animation-order: {{ forloop.index }};"{% endif %}>
+              {% render 'card-product',
+                card_product: product,
+                media_aspect_ratio: section.settings.image_ratio,
+                show_secondary_image: section.settings.show_secondary_image,
+                show_vendor: false,
+                show_rating: section.settings.show_rating,
+                lazy_load: true,
+                skip_styles: skip_styles,
+                section_id: section.id,
+                quick_add: section.settings.quick_add
+              %}
+            </div>
             {%- assign skip_styles = true -%}
           {%- else -%}
             {%- for i in (1..4) -%}
               {%- assign placeholder_image = 'product-apparel-' | append: forloop.index -%}
-              {% render 'card-product', placeholder_image: placeholder_image, media_aspect_ratio: 'adapt', skip_styles: false %}
+              <div {% if settings.animations_reveal_on_scroll %}class="scroll-trigger animate--slide-in" style="--animation-order: {{ forloop.index }};"{% endif %}>
+                {% render 'card-product', placeholder_image: placeholder_image, media_aspect_ratio: 'adapt', skip_styles: false %}
+              </div>
             {%- endfor -%}
           {%- endfor -%}
         {%- else -%}
           {%- for i in (1..4) -%}
             {%- assign placeholder_image = 'product-apparel-' | append: forloop.index -%}
-            {% render 'card-product', placeholder_image: placeholder_image, media_aspect_ratio: 'adapt', skip_styles: false %}
+            <div {% if settings.animations_reveal_on_scroll %}class="scroll-trigger animate--slide-in" style="--animation-order: {{ forloop.index }};"{% endif %}>
+              {% render 'card-product', placeholder_image: placeholder_image, media_aspect_ratio: 'adapt', skip_styles: false %}
+            </div>
           {%- endfor -%}
         {%- endif -%}
       </div>
@@ -177,28 +183,34 @@
         {%- if section.settings.bestseller_collection != blank -%}
           {%- assign skip_styles = false -%}
           {%- for product in section.settings.bestseller_collection.products limit: products_limit -%}
-            {% render 'card-product',
-              card_product: product,
-              media_aspect_ratio: section.settings.image_ratio,
-              show_secondary_image: section.settings.show_secondary_image,
-              show_vendor: false,
-              show_rating: section.settings.show_rating,
-              lazy_load: true,
-              skip_styles: skip_styles,
-              section_id: section.id,
-              quick_add: section.settings.quick_add
-            %}
+            <div {% if settings.animations_reveal_on_scroll %}class="scroll-trigger animate--slide-in" style="--animation-order: {{ forloop.index }};"{% endif %}>
+              {% render 'card-product',
+                card_product: product,
+                media_aspect_ratio: section.settings.image_ratio,
+                show_secondary_image: section.settings.show_secondary_image,
+                show_vendor: false,
+                show_rating: section.settings.show_rating,
+                lazy_load: true,
+                skip_styles: skip_styles,
+                section_id: section.id,
+                quick_add: section.settings.quick_add
+              %}
+            </div>
             {%- assign skip_styles = true -%}
           {%- else -%}
             {%- for i in (1..4) -%}
               {%- assign placeholder_image = 'product-apparel-' | append: forloop.index -%}
-              {% render 'card-product', placeholder_image: placeholder_image, media_aspect_ratio: 'adapt', skip_styles: false %}
+              <div {% if settings.animations_reveal_on_scroll %}class="scroll-trigger animate--slide-in" style="--animation-order: {{ forloop.index }};"{% endif %}>
+                {% render 'card-product', placeholder_image: placeholder_image, media_aspect_ratio: 'adapt', skip_styles: false %}
+              </div>
             {%- endfor -%}
           {%- endfor -%}
         {%- else -%}
           {%- for i in (1..4) -%}
             {%- assign placeholder_image = 'product-apparel-' | append: forloop.index -%}
-            {% render 'card-product', placeholder_image: placeholder_image, media_aspect_ratio: 'adapt', skip_styles: false %}
+            <div {% if settings.animations_reveal_on_scroll %}class="scroll-trigger animate--slide-in" style="--animation-order: {{ forloop.index }};"{% endif %}>
+              {% render 'card-product', placeholder_image: placeholder_image, media_aspect_ratio: 'adapt', skip_styles: false %}
+            </div>
           {%- endfor -%}
         {%- endif -%}
       </div>
@@ -213,28 +225,34 @@
         {%- if section.settings.new_arrivals_collection != blank -%}
           {%- assign skip_styles = false -%}
           {%- for product in section.settings.new_arrivals_collection.products limit: products_limit -%}
-            {% render 'card-product',
-              card_product: product,
-              media_aspect_ratio: section.settings.image_ratio,
-              show_secondary_image: section.settings.show_secondary_image,
-              show_vendor: false,
-              show_rating: section.settings.show_rating,
-              lazy_load: true,
-              skip_styles: skip_styles,
-              section_id: section.id,
-              quick_add: section.settings.quick_add
-            %}
+            <div {% if settings.animations_reveal_on_scroll %}class="scroll-trigger animate--slide-in" style="--animation-order: {{ forloop.index }};"{% endif %}>
+              {% render 'card-product',
+                card_product: product,
+                media_aspect_ratio: section.settings.image_ratio,
+                show_secondary_image: section.settings.show_secondary_image,
+                show_vendor: false,
+                show_rating: section.settings.show_rating,
+                lazy_load: true,
+                skip_styles: skip_styles,
+                section_id: section.id,
+                quick_add: section.settings.quick_add
+              %}
+            </div>
             {%- assign skip_styles = true -%}
           {%- else -%}
             {%- for i in (1..4) -%}
               {%- assign placeholder_image = 'product-apparel-' | append: forloop.index -%}
-              {% render 'card-product', placeholder_image: placeholder_image, media_aspect_ratio: 'adapt', skip_styles: false %}
+              <div {% if settings.animations_reveal_on_scroll %}class="scroll-trigger animate--slide-in" style="--animation-order: {{ forloop.index }};"{% endif %}>
+                {% render 'card-product', placeholder_image: placeholder_image, media_aspect_ratio: 'adapt', skip_styles: false %}
+              </div>
             {%- endfor -%}
           {%- endfor -%}
         {%- else -%}
           {%- for i in (1..4) -%}
             {%- assign placeholder_image = 'product-apparel-' | append: forloop.index -%}
-            {% render 'card-product', placeholder_image: placeholder_image, media_aspect_ratio: 'adapt', skip_styles: false %}
+            <div {% if settings.animations_reveal_on_scroll %}class="scroll-trigger animate--slide-in" style="--animation-order: {{ forloop.index }};"{% endif %}>
+              {% render 'card-product', placeholder_image: placeholder_image, media_aspect_ratio: 'adapt', skip_styles: false %}
+            </div>
           {%- endfor -%}
         {%- endif -%}
       </div>

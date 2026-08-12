@@ -48,7 +48,7 @@
   }
 {%- endstyle -%}
 
-<div class="feature-highlights page-width">
+<div class="feature-highlights page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
   <div class="feature-highlights__grid">
     {%- for block in section.blocks -%}
       <div
