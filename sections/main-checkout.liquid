@@ -153,16 +153,14 @@
           </div>
 
           <!-- Place order button inside payment card -->
-          <a
-            href="/pages/checkout"
+          <button
+            type="submit"
+            id="checkout-place-order"
             class="checkout-submit"
-            {% if cart == empty %}
-              aria-disabled="true"
-              style="pointer-events:none;opacity:0.5;"
-            {% endif %}
+            {% if cart == empty %}disabled style="opacity:0.5;cursor:not-allowed;"{% endif %}
           >
             Place order
-          </a>
+          </button>
         </div>
 
       </form>
@@ -221,6 +219,64 @@
 
   </div>
 </div>
+
+<script>
+(function () {
+  var form = document.querySelector('.checkout-form');
+  if (!form) return;
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    var btn = document.getElementById('checkout-place-order');
+    btn.disabled = true;
+    btn.textContent = 'Processing...';
+
+    // Collect all form fields as cart attributes + note
+    var data = new FormData(form);
+    var params = new URLSearchParams();
+
+    // Build attributes object
+    var attributes = {};
+    for (var pair of data.entries()) {
+      var key = pair[0];
+      var val = pair[1];
+      var match = key.match(/^attributes\[(.+)\]$/);
+      if (match) {
+        attributes[match[1]] = val;
+      } else if (key === 'note') {
+        params.set('note', val);
+      }
+    }
+
+    // Add payment method to attributes
+    var paymentMethod = form.querySelector('input[name="payment_method"]:checked');
+    if (paymentMethod) attributes['payment_method'] = paymentMethod.value;
+
+    // Append attributes to params
+    Object.keys(attributes).forEach(function (k) {
+      params.append('attributes[' + k + ']', attributes[k]);
+    });
+
+    // Save cart attributes via AJAX then redirect to checkout
+    fetch('/cart/update.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: params.toString()
+    })
+    .then(function (res) {
+      if (!res.ok) throw new Error('Cart update failed');
+      // Redirect straight to Shopify checkout (skips cart page)
+      window.location.href = '/checkout';
+    })
+    .catch(function () {
+      btn.disabled = false;
+      btn.textContent = 'Place order';
+      alert('Something went wrong. Please try again.');
+    });
+  });
+})();
+</script>
 
 {% schema %}
 {

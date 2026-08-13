@@ -73,39 +73,19 @@
       #MainProduct-{{ section.id }} .price--large { font-size: 2.8rem; }
     }
 
-    /* Quantity + cart icon on same row */
-    #MainProduct-{{ section.id }} .quantity-with-cart {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    #MainProduct-{{ section.id }} .product-qty-cart-btn {
-      width: 4.5rem;
-      height: 4.5rem;
-      flex-shrink: 0;
-      border-radius: 50% !important;
-      border: 0.1rem solid rgba(var(--color-foreground), 0.2) !important;
-      box-shadow: none !important;
-      outline: none !important;
-    }
-
-    #MainProduct-{{ section.id }} .product-qty-cart-btn .svg-wrapper,
-    #MainProduct-{{ section.id }} .product-qty-cart-btn svg {
-      width: 2rem;
-      height: 2rem;
-    }
-
-    /* Hide original cart icon inside buy-buttons */
-    #MainProduct-{{ section.id }} .product-form__buttons .product__action-icon-btn[aria-label="{{ 'products.product.add_to_cart' | t }}"] {
-      display: none !important;
-    }
 
     /* Rounded corners */
     #MainProduct-{{ section.id }} .quantity,
     #MainProduct-{{ section.id }} .quantity::before,
     #MainProduct-{{ section.id }} .quantity::after { border-radius: 50px !important; }
     #MainProduct-{{ section.id }} .product-form__submit { border-radius: 50px !important; }
+    #MainProduct-{{ section.id }} .product-form__submit:not([disabled]):hover::after,
+    #MainProduct-{{ section.id }} .product-form__submit::after { box-shadow: none !important; border: none !important; }
+
+    /* Hide round cart icon button next to Add to Cart */
+    #MainProduct-{{ section.id }} .product-form__buttons .product__action-icon-btn[aria-label="{{ 'products.product.add_to_cart' | t }}"] {
+      display: none !important;
+    }
     #MainProduct-{{ section.id }} .shopify-payment-button__button--unbranded { border-radius: 50px !important; }
     #MainProduct-{{ section.id }} .product__action-icon-btn { border-radius: 50% !important; }
   {%- endstyle -%}
@@ -351,7 +331,6 @@
                       </span>
                     </label>
                     <div class="price-per-item__container">
-                      <div class="quantity-with-cart">
                       <quantity-input class="quantity" data-url="{{ product.url }}" data-section="{{ section.id }}">
                         <button class="quantity__button" name="minus" type="button">
                           <span class="visually-hidden">
@@ -386,17 +365,6 @@
                           </span>
                         </button>
                       </quantity-input>
-                      <button
-                        type="submit"
-                        name="add"
-                        form="{{ product_form_id }}"
-                        class="product__action-icon-btn product-qty-cart-btn"
-                        aria-label="{{ 'products.product.add_to_cart' | t }}"
-                        {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}
-                      >
-                        <span class="svg-wrapper">{{- 'icon-cart.svg' | inline_asset_content -}}</span>
-                      </button>
-                      </div>
                       {%- liquid
                         assign volume_pricing_array = product.selected_or_first_available_variant.quantity_price_breaks | sort: 'quantity' | reverse
                         assign current_qty_for_volume_pricing = cart_qty | plus: product.selected_or_first_available_variant.quantity_rule.min
