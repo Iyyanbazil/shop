@@ -81,6 +81,25 @@
     text-decoration: underline;
   }
 
+  .utility-bar__account-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .utility-bar__account-link account-icon {
+    display: flex;
+    align-items: center;
+  }
+
+  .utility-bar__account-link account-icon .svg-wrapper svg,
+  .utility-bar__account-link account-icon img {
+    width: 18px;
+    height: 18px;
+    fill: #ffffff;
+    border-radius: 50%;
+  }
+
   @media screen and (max-width: 1000px) {
     .utility-bar__bar-layout {
       padding-left: 1.6rem;
@@ -112,8 +131,17 @@
     </div>
     <div class="utility-bar__auth">
       {%- if customer -%}
-        <a href="{{ routes.account_url }}">Login</a>
-        <a href="{{ routes.account_url }}">Register</a>
+        <a href="{{ routes.account_url }}" class="utility-bar__account-link">
+          <account-icon>
+            {%- if customer.has_avatar? -%}
+              {{ customer | avatar }}
+            {%- else -%}
+              <span class="svg-wrapper">{{- 'icon-account.svg' | inline_asset_content -}}</span>
+            {%- endif -%}
+          </account-icon>
+          {{ customer.first_name | default: 'Account' }}
+        </a>
+        <a href="{{ routes.account_logout_url }}">{{ 'customer.log_out' | t }}</a>
       {%- else -%}
         <a href="{{ routes.account_login_url }}">Login</a>
         <a href="{{ routes.account_register_url }}">Register</a>
