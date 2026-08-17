@@ -62,7 +62,87 @@
     margin-bottom: 1rem;
     line-height: 1.7;
   }
+
+  /* Judge.me new Vue widget star fix */
+  .jm-star-rating {
+    --jm-review-widget-star-and-histogram-color: #f5c518;
+    color: #d0d0d0;
+  }
+  .jm-star-rating__font-icon {
+    font-size: 0 !important;
+    border: none !important;
+    background: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    width: auto !important;
+    height: auto !important;
+    display: inline-block !important;
+    vertical-align: middle !important;
+    padding: 0 !important;
+    margin: 0 1px !important;
+  }
+  .jm-star-rating__font-icon::before {
+    content: '★' !important;
+    font-family: Times, Georgia, serif !important;
+    font-size: 2rem !important;
+    font-style: normal !important;
+    line-height: 1 !important;
+    display: inline !important;
+    color: inherit !important;
+  }
 </style>
+
+<script>
+(function () {
+  var css = [
+    '.jm-star-rating__font-icon{font-size:0!important;border:none!important;background:none!important;outline:none!important;box-shadow:none!important;width:auto!important;height:auto!important;display:inline-block!important;vertical-align:middle!important;padding:0!important;margin:0 1px!important;}',
+    '.jm-star-rating__font-icon::before{content:"★"!important;font-family:Times,Georgia,serif!important;font-size:1.5rem!important;font-style:normal!important;line-height:1!important;display:inline!important;color:inherit!important;}'
+  ].join('');
+
+  var styleEl = document.createElement('style');
+  styleEl.setAttribute('data-jm-star-fix', '1');
+  styleEl.textContent = css;
+  document.head.appendChild(styleEl);
+
+  function fixStarColors() {
+    var ratings = document.querySelectorAll('.jm-star-rating');
+    if (!ratings.length) return false;
+
+    ratings.forEach(function (rating) {
+      /* Parse score from aria-label e.g. "4 out of 5 stars" */
+      var label = rating.getAttribute('aria-label') || '';
+      var match = label.match(/([\d.]+)\s+out\s+of\s+([\d.]+)/i);
+      if (!match) return;
+      var score = Math.round(parseFloat(match[1]));
+
+      var stars = rating.querySelectorAll('.jm-star-rating__font-icon');
+      stars.forEach(function (el, i) {
+        el.style.setProperty('color', i < score ? '#f5c518' : '#d0d0d0', 'important');
+      });
+    });
+    return true;
+  }
+
+  /* Poll every 250 ms until stars appear (Judge.me renders async) */
+  var poll = setInterval(function () {
+    if (fixStarColors()) clearInterval(poll);
+  }, 250);
+  setTimeout(function () { clearInterval(poll); }, 12000);
+
+  /* Debounced observer catches re-renders; childList-only so our own
+     style/attribute changes don't re-trigger it */
+  var debounce;
+  var mo = new MutationObserver(function () {
+    clearTimeout(debounce);
+    debounce = setTimeout(fixStarColors, 150);
+  });
+  function startObs() {
+    mo.observe(document.body, { childList: true, subtree: true });
+  }
+  if (document.body) startObs();
+  else document.addEventListener('DOMContentLoaded', startObs);
+})();
+</script>
 
 <div class="description-tabs section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
   <div class="page-width">
