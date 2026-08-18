@@ -63,51 +63,51 @@
         "cat_1": {
           "type": "category",
           "settings": {
-            "collection": "",
+            "collection": "top-seller",
             "title": "Playsets",
             "icon": "shopify://shop_images/Isolation_Mode_2.png",
             "emoji": "🎠",
-            "link": "/collections/playsets"
+            "link": "shopify://collections/top-seller"
           }
         },
         "cat_2": {
           "type": "category",
           "settings": {
-            "collection": "",
+            "collection": "hydrogen",
             "title": "Control Toys",
             "icon": "shopify://shop_images/Toy_Car.png",
             "emoji": "🚗",
-            "link": "/collections/control-toys"
+            "link": "shopify://collections/hydrogen"
           }
         },
         "cat_3": {
           "type": "category",
           "settings": {
-            "collection": "",
+            "collection": "top-seller",
             "title": "Educational Toys",
             "icon": "shopify://shop_images/Brick.png",
             "emoji": "🔤",
-            "link": "/collections/educational-toys"
+            "link": "shopify://collections/top-seller"
           }
         },
         "cat_4": {
           "type": "category",
           "settings": {
-            "collection": "",
+            "collection": "hydrogen",
             "title": "Eco-Friendly Toys",
             "icon": "shopify://shop_images/Rocking_Horse.png",
             "emoji": "🐴",
-            "link": "/collections/eco-friendly-toys"
+            "link": "shopify://collections/hydrogen"
           }
         },
         "cat_5": {
           "type": "category",
           "settings": {
-            "collection": "",
+            "collection": "top-seller",
             "title": "Stuffed Toys",
             "icon": "shopify://shop_images/Teddy_Bear.png",
             "emoji": "🧸",
-            "link": "/collections/stuffed-toys"
+            "link": "shopify://collections/top-seller"
           }
         }
       },
