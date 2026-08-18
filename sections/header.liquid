@@ -57,33 +57,24 @@
 
   .header__icon--wishlist .svg-wrapper svg,
   .header__icon--wishlist .svg-wrapper svg path {
-    fill: rgba(var(--color-foreground), 0.65);
-    stroke: none;
-    transition: fill 0.2s;
-  }
-
-  .header__icon--wishlist:hover .svg-wrapper svg,
-  .header__icon--wishlist:hover .svg-wrapper svg path {
     fill: #e8344a;
+    stroke: none;
   }
 
   .wishlist-count-bubble {
     position: absolute;
-    right: -0.6rem;
-    top: -0.6rem;
     background-color: #e8344a;
     color: #ffffff;
-    border: 0.2rem solid rgb(var(--color-background));
-    border-radius: 1.2rem;
-    min-width: 1.8rem;
-    height: 1.8rem;
+    height: 1.7rem;
+    width: 1.7rem;
+    border-radius: 100%;
     display: flex;
-    align-items: center;
     justify-content: center;
-    font-size: 1.05rem;
-    font-weight: 700;
-    padding: 0 0.3rem;
-    line-height: 1;
+    align-items: center;
+    font-size: 0.9rem;
+    bottom: 0.8rem;
+    left: 2.2rem;
+    line-height: calc(1 + 0.1 / var(--font-body-scale));
   }
 
   /* Inline search bar (desktop only) */
@@ -449,14 +440,6 @@
         {%- endcase -%}
       {%- endfor -%}
 
-      <a href="/pages/wishlist" class="header__icon header__icon--wishlist link focus-inset" aria-label="Favourites">
-        <span class="svg-wrapper">{{- 'icon-heart.svg' | inline_asset_content -}}</span>
-        <span class="visually-hidden">Favourites</span>
-        <div class="wishlist-count-bubble" style="display:none">
-          <span aria-hidden="true">0</span>
-        </div>
-      </a>
-
       <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset" id="cart-icon-bubble">
         {% if cart == empty %}
           <span class="svg-wrapper">{{ 'icon-cart-empty.svg' | inline_asset_content }}</span>
@@ -473,6 +456,15 @@
           </div>
         {%- endif -%}
       </a>
+
+      <a href="/pages/wishlist" class="header__icon header__icon--wishlist link focus-inset" aria-label="Favourites">
+        <span class="svg-wrapper">{{- 'icon-heart.svg' | inline_asset_content -}}</span>
+        <span class="visually-hidden">Favourites</span>
+        <div class="wishlist-count-bubble" style="display:none">
+          <span aria-hidden="true">0</span>
+        </div>
+      </a>
+
       {%- if settings.predictive_search_enabled -%}
         <predictive-search class="header__search-inline-wrapper" data-loading-text="{{ 'accessibility.loading' | t }}">
       {%- else -%}
