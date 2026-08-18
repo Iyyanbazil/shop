@@ -2573,6 +2573,14 @@ input[type='checkbox'] {
   width: 4.4rem;
   padding: 0;
 }
+@media screen and  (max-width:990px) {
+  .header__icon,
+.header__icon--cart .icon {
+  height: 4.4rem;
+  width: 3.4rem;
+  padding: 0;
+}
+}
 
 .header__icon--cart {
   position: relative;
