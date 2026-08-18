@@ -82,6 +82,12 @@
       transition: fill 0.2s ease;
     }
 
+    /* Active state: product is in favourites */
+    .card__action-btn--wishlist[data-in-wishlist="1"] svg,
+    .card__action-btn--wishlist[data-in-wishlist="1"] svg path {
+      fill: #e8344a !important;
+    }
+
     /* Cart: stroke-based trolley icon */
     .card__action-btn--cart svg {
       width: 1.55rem;
@@ -357,7 +363,18 @@
         </div>
         {%- if card_product.featured_media -%}
           <div class="card__actions-overlay">
-            <button class="card__action-btn card__action-btn--wishlist" type="button" aria-label="Add to wishlist" onclick="event.preventDefault(); event.stopPropagation(); return false;">
+            <button
+              class="card__action-btn card__action-btn--wishlist"
+              type="button"
+              aria-label="Add to favourites"
+              data-product-id="{{ card_product.id }}"
+              data-product-title="{{ card_product.title | escape }}"
+              data-product-url="{{ card_product.url }}"
+              data-product-image="{{ card_product.featured_media | image_url: width: 400 }}"
+              data-product-price="{{ card_product.price }}"
+              data-product-price-formatted="{{ card_product.price | money }}"
+              data-variant-id="{{ card_product.selected_or_first_available_variant.id }}"
+            >
               {{- 'icon-heart.svg' | inline_asset_content -}}
             </button>
             {%- if card_product.available -%}
